@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">MyUtils</string>
+
+    <!-- NetUtil -->
+    <string name="NetUtils">网络实时监测</string>
+    <string name="NetUtils_offline">断网了</string>
+    <string name="NetUtils_button1">检测是否有网</string>
+    <string name="NetUtils_button2">检测是否有wifi</string>
+
+    <!--序列号及uuid-->
+    <string name="XuLieHao">uuid和序列号</string>
+
+    <!--上下拉刷新-->
+    <string name="SwipeRefresh">上下拉刷新</string>
+
+    <!-- recyclerView -->
+    <string name="recyclerView">RecyclerView</string>
+
+    <!-- RxJava -->
+    <string name="RxJava">RxJava</string>
+
+    <!-- okHttp -->
+    <string name="okHttp">okHttp</string>
+
+    <!-- DataBinding -->
+    <string name="DataBinding">DataBinding</string>
+
+</resources>

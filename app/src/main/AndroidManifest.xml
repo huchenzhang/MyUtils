@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.example.huchenzhang.myutils">
+
+    <!--网络权限-->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <!-- 读取IMSI的权限,IMEI -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+
+        <activity android:name=".netUtils.NetUtilsActivity"/>
+
+        <activity android:name=".xuliehao.XuLieHao"/>
+
+        <activity android:name=".swiperefresh.SwipeRefreshActivity"/>
+
+        <activity android:name=".recyclerview.MyRecyclerView"/>
+
+        <activity android:name=".rxjava.RxJava"/>
+
+        <activity android:name=".myDataBinding.MyDataBindingActivity"/>
+
+    </application>
+
+</manifest>
