@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
+        <import type="com.example.huchenzhang.myutils.myDataBinding.MyStringUtils"/>
         <variable
             name = "user"
             type = "com.example.huchenzhang.myutils.myDataBinding.User"
@@ -13,10 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!--直接在view中调用类方法：1.在data标签中先导包，<import /> 2.在需要的地方使用类的方法-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{user.name}"
+            android:text="@{MyStringUtils.capitalize(user.name)}"
             />
 
         <TextView

@@ -24,4 +24,6 @@
 
 #### 6.DataBinding
 
-数据与view绑定
+- 基础用法数据与view绑定
+- 在xml中调用类方法：首先：xml中在data标签中先导包，<import /> 然后：在需要的地方使用类的方法
+
