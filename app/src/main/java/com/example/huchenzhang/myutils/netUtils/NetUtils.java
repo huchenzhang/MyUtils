@@ -11,6 +11,7 @@ import static android.content.Context.CONNECTIVITY_SERVICE;
 
 /**
  * 网络监测，提供查看网络状态的方法，并且如果网络改变会发送广播
+ * 7.0 以后网络监听，电池电量这种隐式意图被禁止了
  * Created by hu on 2017/4/26.
  */
 
