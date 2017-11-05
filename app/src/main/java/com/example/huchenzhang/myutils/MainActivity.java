@@ -1,19 +1,15 @@
 package com.example.huchenzhang.myutils;
 
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.GridLayout;
-
-import com.example.huchenzhang.myutils.databinding.DataBindingActivityBinding;
 import com.example.huchenzhang.myutils.myDataBinding.MyDataBindingActivity;
 import com.example.huchenzhang.myutils.netUtils.NetUtilsActivity;
 import com.example.huchenzhang.myutils.recyclerview.MyRecyclerView;
 import com.example.huchenzhang.myutils.rxjava.RxJava;
 import com.example.huchenzhang.myutils.swiperefresh.SwipeRefreshActivity;
 import com.example.huchenzhang.myutils.xuliehao.XuLieHao;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

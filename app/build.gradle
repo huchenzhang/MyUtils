@@ -1,8 +1,11 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.example.huchenzhang.myutils"
         minSdkVersion 19
@@ -20,6 +23,11 @@ android {
     dataBinding{
         enabled = true
     }
+    crashlytics {
+        enableNdk true
+        androidNdkOut 'src/main/obj'
+        androidNdkLibsOut 'src/main/libs'
+    }
 }
 
 dependencies {
@@ -27,19 +35,40 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
+        transitive = true;
+    }
+    compile('com.crashlytics.sdk.android:crashlytics-ndk:1.1.6@aar') {
+        transitive = true;
+    }
     compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:design:25.4.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
     testCompile 'junit:junit:4.12'
 
     //UI相关
     compile 'com.jakewharton:butterknife:7.0.1'//UI注解库
     compile 'com.github.Aspsine:SwipeToLoadLayout:v1.0.0'//上下拉刷新
-    compile 'com.android.support:recyclerview-v7:25.3.1'//recyclerview
-    compile 'com.android.support:gridlayout-v7:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.4.0'//recyclerview
+    compile 'com.android.support:gridlayout-v7:25.4.0'
     //异步
-    compile 'io.reactivex.rxjava2:rxjava:2.0.4'
+    compile 'io.reactivex.rxjava2:rxjava:2.0.5'
 
     //网络
     compile 'com.squareup.okhttp3:okhttp:3.7.0'
+    //kotlin
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
+    maven { url 'https://maven.fabric.io/public' }
+    maven {
+        url 'https://maven.google.com/'
+        name 'Google'
+    }
+}
+
+crashlytics {
+    androidNdkOut 'src/main/obj'
+    androidNdkLibsOut 'src/main/libs'
 }

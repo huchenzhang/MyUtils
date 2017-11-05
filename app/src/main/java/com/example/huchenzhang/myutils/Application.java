@@ -1,6 +1,9 @@
 package com.example.huchenzhang.myutils;
 
 import android.content.Context;
+import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.ndk.CrashlyticsNdk;
+import io.fabric.sdk.android.Fabric;
 
 /**
  * 最先初始化
@@ -12,6 +15,7 @@ public class Application extends android.app.Application{
 	
 	public void onCreate(){
 		super.onCreate();
+		Fabric.with(this, new Crashlytics(), new CrashlyticsNdk());
 		Application.context = getApplicationContext();
 	}
 	

@@ -12,6 +12,10 @@ import com.example.huchenzhang.myutils.R;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+/**
+ * 这个使用有点复杂，换下面这个地址
+ * compile 'org.litepal.android:core:1.6.0'
+ */
 public class SwipeRefreshActivity extends BaseActivity {
 	@Bind(R.id.swipe_refresh_header)
 	SwipeRefreshHeaderView swipeRefreshHeader;

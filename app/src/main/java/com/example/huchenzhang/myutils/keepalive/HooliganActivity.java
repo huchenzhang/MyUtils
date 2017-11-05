@@ -7,9 +7,8 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
-
 import com.example.huchenzhang.myutils.Application;
-import com.example.huchenzhang.myutils.utils.StaticConstants;
+import com.example.huchenzhang.myutils.utils.Constants;
 
 /**
  * 一像素点保活
@@ -22,10 +21,10 @@ public class HooliganActivity extends Activity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Log.e(StaticConstants.HU_LOG,"------- onCreate");
+		Log.e(Constants.HU_LOG,"------- onCreate");
 		instance = this;
 		Window window = getWindow();
-		window.setGravity(Gravity.LEFT | Gravity.TOP);
+		window.setGravity(Gravity.START | Gravity.TOP);
 		WindowManager.LayoutParams params = window.getAttributes();
 		params.x = 0;
 		params.y = 0;
@@ -46,7 +45,7 @@ public class HooliganActivity extends Activity{
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		Log.e(StaticConstants.HU_LOG,"------- onDestroy");
+		Log.e(Constants.HU_LOG,"------- onDestroy");
 		instance = null;
 	}
 	

@@ -1,14 +1,20 @@
 package com.example.huchenzhang.myutils.xuliehao;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.example.huchenzhang.myutils.BaseActivity;
 import com.example.huchenzhang.myutils.R;
+
 import java.lang.reflect.Method;
 import java.util.UUID;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -31,7 +37,7 @@ public class XuLieHao extends BaseActivity {
 	TextView number5;
 	@Bind(R.id.lay_xuLieHao)
 	RelativeLayout layXuLieHao;
-
+	
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,7 +45,7 @@ public class XuLieHao extends BaseActivity {
 		ButterKnife.bind(this);
 		initView();
 	}
-
+	
 	private void initView() {
 		tm = (TelephonyManager) this.getSystemService(TELEPHONY_SERVICE);
 		number.setText(String.format("序列号 : %s", getSerialNumber()));
@@ -48,7 +54,7 @@ public class XuLieHao extends BaseActivity {
 		number4.setText(String.format("IMEI SV : %s", getSoftwareVersion()));
 		number5.setText(String.format("UUID : %s", getUUID()));
 	}
-
+	
 	/**
 	 * 获取序列号
 	 */
@@ -63,7 +69,7 @@ public class XuLieHao extends BaseActivity {
 		}
 		return serial;
 	}
-
+	
 	/**
 	 * 获取IMSI
 	 */

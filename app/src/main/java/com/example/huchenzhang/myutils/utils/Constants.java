@@ -5,6 +5,6 @@ package com.example.huchenzhang.myutils.utils;
  * Created by hu_cz on 2017/11/1 9:33.
  */
 
-public class StaticConstants {
+public class Constants {
 	public static final String HU_LOG = "hu_cz";
 }

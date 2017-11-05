@@ -14,7 +14,7 @@ import android.view.View;
 import com.example.huchenzhang.myutils.R;
 
 /**
- * item之间的分割线
+ * 自定义item之间的分割线
  * Created by hu on 2017/4/27.
  */
 

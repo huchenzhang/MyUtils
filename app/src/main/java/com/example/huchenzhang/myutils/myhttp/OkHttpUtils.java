@@ -2,6 +2,9 @@ package com.example.huchenzhang.myutils.myhttp;
 
 import android.content.Context;
 import android.util.Log;
+
+import com.example.huchenzhang.myutils.utils.Constants;
+
 import java.io.IOException;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -37,10 +40,10 @@ public class OkHttpUtils {
 			public void onResponse(Call call, Response response) throws IOException {
 				if(null != response.cacheResponse()){
 					String str = response.cacheResponse().toString();
-					Log.i("okHttp",str);
+					Log.i(Constants.HU_LOG, "OkHttpUtils -----" + str);
 				}else{
 					String str = response.networkResponse().toString();
-					Log.i("okHttp",str);
+					Log.i(Constants.HU_LOG,"OkHttpUtils -----" + str);
 				}
 			}
 		});

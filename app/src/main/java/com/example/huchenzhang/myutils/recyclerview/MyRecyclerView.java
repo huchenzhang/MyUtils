@@ -14,6 +14,7 @@ import com.example.huchenzhang.myutils.R;
 import com.example.huchenzhang.myutils.utils.HuToast;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -58,6 +59,8 @@ public class MyRecyclerView extends BaseActivity {
 		mAdapter.setOnItemClickListener(new MyRecyclerViewAdapter.OnItemClickListener() {
 			@Override
 			public void onClick(View view, int position) {
+				Date date = null;
+				date.getTime();
 				HuToast.show("点击了 "+ position,MyRecyclerView.this);
 			}
 		});
