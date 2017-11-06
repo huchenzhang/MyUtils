@@ -18,7 +18,7 @@ class Greeter(val name:String){
 }
 
 /** 不需要new Greeter对象 **/
-fun main2(args: Array<String>){
+fun test(args: Array<String>){
     Greeter(args[0]).greet()
 }
 
