@@ -30,7 +30,7 @@ public class MyRecyclerView extends BaseActivity {
 	@Bind(R.id.lay_recycler_view)
 	RecyclerView layRecyclerView;
 
-	private List<String> mDatas;//假数据
+	private List<String> mDates;//假数据
 	private MyRecyclerViewAdapter mAdapter;//适配器
 
 	@Override
@@ -43,7 +43,7 @@ public class MyRecyclerView extends BaseActivity {
 	}
 
 	private void initView() {
-		mAdapter = new MyRecyclerViewAdapter(this,mDatas);
+		mAdapter = new MyRecyclerViewAdapter(this,mDates);
 		LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 		//设置布局管理器
 		layRecyclerView.setLayoutManager(layoutManager);
@@ -79,10 +79,10 @@ public class MyRecyclerView extends BaseActivity {
 	 * @return 数据
 	 */
 	private List<String> initData(){
-		mDatas = new ArrayList<>();
+		mDates = new ArrayList<>();
 		for(int i = 0; i < 40 ; i++){
-			mDatas.add("Android " + i);
+			mDates.add("Android " + i);
 		}
-		return mDatas;
+		return mDates;
 	}
 }

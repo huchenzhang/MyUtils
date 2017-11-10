@@ -1,12 +1,18 @@
+//第一行代码应用了android程序的gradle插件，作为android的应用程序，第一步是必须的
+//因为plugin中提供了android编译、测试、打包等的所有task
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'io.fabric'
 
+//这是编译文件中最大的代码块，关于android的所有特殊配置都在这里。
 android {
     compileSdkVersion 25
     buildToolsVersion '26.0.2'
+    //程序默认配置，如果AndroidMainfest.xml里面定义了与这里相同的属性，会以这里为主
     defaultConfig {
+        //1.作为程序唯一标示，防止同一个手机重复安装同一个应用。
+        //2.作为R文件的包名，改名不会报错
         applicationId "com.example.huchenzhang.myutils"
         minSdkVersion 19
         targetSdkVersion 25
@@ -14,10 +20,25 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    //渠道包
+    productFlavors {
+        xiaomi {
+            manifestPlaceholders = [channel: "xiaomi"]
+        }
+        wandoujia {
+            manifestPlaceholders = [channel: "wandoujia"]
+        }
+    }
+    //定义了编译类型，针对每一个类型我们可以有不同的编译配置，不同的编译配置对应的有不同的编译命令。
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true
+        }
+        release {
+            minifyEnabled true
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-project.txt'
         }
     }
     dataBinding{
@@ -28,19 +49,38 @@ android {
         androidNdkOut 'src/main/obj'
         androidNdkLibsOut 'src/main/libs'
     }
+    repositories {
+        mavenCentral()
+        maven { url 'https://maven.fabric.io/public' }
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+    }
+
+    //自定义apk安装包名
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFile = new File(
+                    output.outputFile.parent + "/${variant.buildType.name}",
+                    "测试-${variant.buildType.name}-v${variant.versionName}-${variant.productFlavors[0].name}-${releaseTime()}.apk".toLowerCase())
+        }
+    }
+
 }
 
+static def releaseTime() {
+    return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC"))
+}
+
+
+
+//属于gradle的依赖配置，定义了当前项目所需要的依赖的其它库
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
-        transitive = true;
-    }
-    compile('com.crashlytics.sdk.android:crashlytics-ndk:1.1.6@aar') {
-        transitive = true;
-    }
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.4.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
@@ -48,27 +88,25 @@ dependencies {
 
     //UI相关
     compile 'com.jakewharton:butterknife:7.0.1'//UI注解库
-    compile 'com.github.Aspsine:SwipeToLoadLayout:v1.0.0'//上下拉刷新
+    compile 'com.github.Aspsine:SwipeToLoadLayout:v1.0.0' //上下拉刷新
+    compile 'org.litepal.android:core:1.6.0'    //上拉下拉刷新（方便，建议用这个）
     compile 'com.android.support:recyclerview-v7:25.4.0'//recyclerview
     compile 'com.android.support:gridlayout-v7:25.4.0'
     //异步
     compile 'io.reactivex.rxjava2:rxjava:2.0.5'
-
+    //广播
+    compile 'com.parse.bolts:bolts-android:1.4.0'
     //网络
     compile 'com.squareup.okhttp3:okhttp:3.7.0'
     //kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-}
-repositories {
-    mavenCentral()
-    maven { url 'https://maven.fabric.io/public' }
-    maven {
-        url 'https://maven.google.com/'
-        name 'Google'
+    //fabric，崩溃检测，用户量统计
+    compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
+        transitive = true
+    }
+    compile('com.crashlytics.sdk.android:crashlytics-ndk:1.1.6@aar') {
+        transitive = true
     }
 }
 
-crashlytics {
-    androidNdkOut 'src/main/obj'
-    androidNdkLibsOut 'src/main/libs'
-}
+

@@ -7,6 +7,8 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
+
 import com.example.huchenzhang.myutils.keepalive.BootCompleteReceiver;
 import com.example.huchenzhang.myutils.netUtils.NetUtils;
 import butterknife.ButterKnife;
@@ -28,6 +30,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 		registerNet();
 		//注册锁屏监听
 		registerScreen();
+		//检查当前版本
+		checkFlavor();
 	}
 	
 	
@@ -74,6 +78,14 @@ public abstract class BaseActivity extends AppCompatActivity {
 		filter.addAction(Intent.ACTION_SCREEN_ON);
 		filter.addAction(Intent.ACTION_SCREEN_OFF);
 		registerReceiver(broadcastReceiver, filter);
+	}
+	
+	/**
+	 * 检查当前版本
+	 */
+	private void checkFlavor(){
+		Toast.makeText(this,BuildConfig.FLAVOR,Toast.LENGTH_SHORT).show();
+		Toast.makeText(this,BuildConfig.DEBUG ? "是debug版本" : "不是debug版本",Toast.LENGTH_SHORT).show();
 	}
 	
 }

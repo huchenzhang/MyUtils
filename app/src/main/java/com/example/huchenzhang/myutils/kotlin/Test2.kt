@@ -59,8 +59,7 @@ public fun test5(a: Int,b: Int){
  * for循环里不需要指定对象类型 **/
 fun test6(vararg v:Int){
     for (vt in v){
-        print("test6 = " + vt)
-        print("\n")
+        print("  test6 = " + vt)
     }
 }
 
