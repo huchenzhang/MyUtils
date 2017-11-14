@@ -16,12 +16,15 @@ android {
         applicationId "com.example.huchenzhang.myutils"
         minSdkVersion 19
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode Integer.parseInt(VERSION_CODE)
+        versionName VERSION_NAME
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     //渠道包
     productFlavors {
+        common {
+            manifestPlaceholders = [channel: "common"]
+        }
         xiaomi {
             manifestPlaceholders = [channel: "xiaomi"]
         }
@@ -55,6 +58,9 @@ android {
         maven {
             url 'https://maven.google.com/'
             name 'Google'
+        }
+        maven {
+            url "http://maven.aliyun.com/nexus/content/repositories/releases"
         }
     }
 
@@ -107,6 +113,8 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics-ndk:1.1.6@aar') {
         transitive = true
     }
+    //阿里云Sophix热修复
+    compile 'com.aliyun.ams:alicloud-android-hotfix:3.1.6'
 }
 
 
