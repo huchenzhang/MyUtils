@@ -47,10 +47,12 @@ public fun test3(a: Int,b: Int):Int = a + b
 
 /** 无返回值的函数，类似java的void **/
 fun test4(a: Int,b: Int) : Unit{
+    a + b
 }
 
 /** 无返回类型的全局方法 **/
 public fun test5(a: Int,b: Int){
+    a + b
 }
 
 /**

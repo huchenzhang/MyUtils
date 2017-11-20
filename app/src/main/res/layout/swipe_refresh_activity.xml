@@ -1,39 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/lay_SwipeRefresh"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.huchenzhang.myutils.swiperefresh.SwipeRefreshActivity">
+    tools:context="com.example.huchenzhang.myutils.swiperefresh.SwipeRefreshActivity"
+    xmlns:add="http://schemas.android.com/apk/res-auto">
 
-    <com.aspsine.swipetoloadlayout.SwipeToLoadLayout
-        android:id="@+id/swipeToLoad"
+
+    <RelativeLayout
+        android:id="@+id/lay_SwipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.example.huchenzhang.myutils.swiperefresh.SwipeRefreshHeaderView
-            android:id="@+id/swipe_refresh_header"
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refresh"
+            add:srlEnableRefresh="true"
+            add:srlEnableLoadmore="true"
+            add:srlEnableAutoLoadmore="false"
+            add:srlDisableContentWhenLoading="true"
+            add:srlDisableContentWhenRefresh="true"
+            add:srlEnableLoadmoreWhenContentNotFull="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="20dp"  />
+            android:layout_height="match_parent">
 
-        <com.example.huchenzhang.myutils.swiperefresh.SwipeRefreshFooterView
-            android:id="@+id/swipe_load_more_footer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="20dp"  />
+            <com.scwang.smartrefresh.layout.header.ClassicsHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-        <TextView
-            android:id="@+id/swipe_target"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
-            android:gravity="center"
-            android:text="Hello World!" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"/>
 
-    </com.aspsine.swipetoloadlayout.SwipeToLoadLayout>
-
-</RelativeLayout>
+            <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </RelativeLayout>
+</layout>

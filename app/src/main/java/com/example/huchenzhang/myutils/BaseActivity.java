@@ -8,10 +8,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
-
 import com.example.huchenzhang.myutils.keepalive.BootCompleteReceiver;
 import com.example.huchenzhang.myutils.netUtils.NetUtils;
-import butterknife.ButterKnife;
 
 /**
  * 项目中Activity的基类
@@ -40,8 +38,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 		super.onDestroy();
 		//取消注册广播
 		unregisterReceiver(mNetUtils);
-		//ButterKnife取消注册
-		ButterKnife.unbind(this);
 	}
 	
 	

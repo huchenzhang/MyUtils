@@ -1,48 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout android:id="@+id/lay_MainLayout"
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:columnCount="3"
-    tools:context="com.example.huchenzhang.myutils.MainActivity"
-    >
+    tools:context="com.example.huchenzhang.myutils.MainActivity">
 
-    <Button
-        android:id="@+id/bt_NetUtils"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_columnSpan="2"
-        android:text="@string/NetUtils"/>
+    <GridLayout
+        android:id="@+id/lay_MainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="3">
 
-    <Button
-        android:id="@+id/bt_XuLieHao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/XuLieHao"/>
+        <Button
+            android:id="@+id/bt_NetUtils"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnSpan="1"
+            android:text="@string/NetUtils"/>
 
-    <Button
-        android:id="@+id/bt_SwipeRefresh"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/SwipeRefresh"/>
+        <Button
+            android:id="@+id/bt_XuLieHao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/XuLieHao"/>
 
-    <Button
-        android:id="@+id/bt_recyclerView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/recyclerView"/>
+        <Button
+            android:id="@+id/bt_SwipeRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/SwipeRefresh"/>
 
-    <Button
-        android:id="@+id/bt_rx_java"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/RxJava"/>
+        <Button
+            android:id="@+id/bt_recyclerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/recyclerView"/>
 
-    <Button
-        android:id="@+id/bt_data_bind"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/DataBinding"/>
+        <Button
+            android:id="@+id/bt_rx_java"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/RxJava"/>
 
-</GridLayout>
+        <Button
+            android:id="@+id/bt_data_bind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/DataBinding"/>
+
+    </GridLayout>
+</layout>

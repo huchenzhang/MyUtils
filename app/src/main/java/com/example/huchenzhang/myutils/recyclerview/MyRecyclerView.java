@@ -1,23 +1,19 @@
 package com.example.huchenzhang.myutils.recyclerview;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.AdapterView;
-
 import com.example.huchenzhang.myutils.BaseActivity;
 import com.example.huchenzhang.myutils.R;
+import com.example.huchenzhang.myutils.databinding.RecyclerViewActivityBinding;
 import com.example.huchenzhang.myutils.utils.HuToast;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * http://blog.csdn.net/skykingf/article/details/50827141
@@ -26,18 +22,14 @@ import butterknife.ButterKnife;
  */
 
 public class MyRecyclerView extends BaseActivity {
-
-	@Bind(R.id.lay_recycler_view)
-	RecyclerView layRecyclerView;
-
+	private RecyclerViewActivityBinding binding;
 	private List<String> mDates;//假数据
 	private MyRecyclerViewAdapter mAdapter;//适配器
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.recycler_view_activity);
-		ButterKnife.bind(this);
+		binding = DataBindingUtil.setContentView(this,R.layout.recycler_view_activity);
 		initData();
 		initView();
 	}
@@ -46,15 +38,15 @@ public class MyRecyclerView extends BaseActivity {
 		mAdapter = new MyRecyclerViewAdapter(this,mDates);
 		LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 		//设置布局管理器
-		layRecyclerView.setLayoutManager(layoutManager);
+		binding.layRecyclerView.setLayoutManager(layoutManager);
 		//设置为垂直布局
 		layoutManager.setOrientation(OrientationHelper.VERTICAL);
 		//设置adapter
-		layRecyclerView.setAdapter(mAdapter);
+		binding.layRecyclerView.setAdapter(mAdapter);
 		//设置增加或删除条目动画
-		layRecyclerView.setItemAnimator(new DefaultItemAnimator());
+		binding.layRecyclerView.setItemAnimator(new DefaultItemAnimator());
 		//设置分割线
-		layRecyclerView.addItemDecoration(new MyItemDecoration(this,LinearLayoutManager.VERTICAL));
+		binding.layRecyclerView.addItemDecoration(new MyItemDecoration(this,LinearLayoutManager.VERTICAL));
 		//设置点击事件监听
 		mAdapter.setOnItemClickListener(new MyRecyclerViewAdapter.OnItemClickListener() {
 			@Override
@@ -70,6 +62,8 @@ public class MyRecyclerView extends BaseActivity {
 			@Override
 			public void onLongClick(View view, int position) {
 				HuToast.show("长按了 " + position,MyRecyclerView.this);
+				//为了测试
+				throw new RuntimeException();
 			}
 		});
 	}

@@ -1,13 +1,12 @@
 package com.example.huchenzhang.myutils.myhttp;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.widget.Button;
+import android.view.View;
 import com.example.huchenzhang.myutils.BaseActivity;
 import com.example.huchenzhang.myutils.R;
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import com.example.huchenzhang.myutils.databinding.OkHttpActivityBinding;
 
 /**
  * OkHttp
@@ -15,22 +14,26 @@ import butterknife.OnClick;
  */
 
 public class OkHttp extends BaseActivity {
-	@Bind(R.id.bt_ok_http)
-	Button btOkHttp;
-
+	private OkHttpActivityBinding binding;
+	
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.ok_http_activity);
-		ButterKnife.bind(this);
+		binding = DataBindingUtil.setContentView(this,R.layout.ok_http_activity);
 		initView();
 	}
 
+	/** 初始化点击事件 **/
 	private void initView() {
-
+		//点击发送按钮
+		binding.btOkHttp.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				sendToBaidu();
+			}
+		});
 	}
 
-	@OnClick(R.id.bt_ok_http)
 	public void sendToBaidu(){
 		OkHttpUtils.getAsynHttp(this);
 	}

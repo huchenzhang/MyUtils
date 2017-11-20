@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:id="@+id/lay_NetUtils"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <DatePicker
-        android:id="@+id/DP_DatePicker"
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/lay_NetUtils"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/bt_net1"
-        android:text="@string/NetUtils_button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <DatePicker
+            android:id="@+id/DP_DatePicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-    <Button
-        android:id="@+id/bt_net2"
-        android:text="@string/NetUtils_button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/bt_net1"
+            android:text="@string/NetUtils_button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
-</LinearLayout>
+        <Button
+            android:id="@+id/bt_net2"
+            android:text="@string/NetUtils_button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</layout>

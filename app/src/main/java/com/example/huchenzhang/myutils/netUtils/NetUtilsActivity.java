@@ -1,17 +1,15 @@
 package com.example.huchenzhang.myutils.netUtils;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.DatePicker;
-import android.widget.LinearLayout;
-
 import com.example.huchenzhang.myutils.BaseActivity;
+import com.example.huchenzhang.myutils.databinding.NetUtilsActivityBinding;
 import com.example.huchenzhang.myutils.utils.HuToast;
 import com.example.huchenzhang.myutils.R;
 import java.util.Calendar;
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * 测试网络的界面
@@ -19,30 +17,24 @@ import butterknife.OnClick;
  */
 
 public class NetUtilsActivity extends BaseActivity {
-
-	@Bind(R.id.lay_NetUtils)
-	LinearLayout layNetUtils;
-	@Bind(R.id.DP_DatePicker)
-	DatePicker DPDatePicker;
-
 	// 定义5个记录当前时间的变量
 	private int year;
 	private int month;
 	private int day;
-
-
+	private NetUtilsActivityBinding binding;
+	
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.net_utils_activity);
-		ButterKnife.bind(this);
+		binding = DataBindingUtil.setContentView(this,R.layout.net_utils_activity);
 		initValue();
 		initListener();
 	}
-
+	
 	/***设置控件的监听*/
 	private void initListener() {
-		DPDatePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
+		//时钟
+		binding.DPDatePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
 			@Override
 			public void onDateChanged(DatePicker datePicker, int i, int i1, int i2) {
 				year = i;
@@ -51,8 +43,24 @@ public class NetUtilsActivity extends BaseActivity {
 				HuToast.show(i + "年" + i1 + "月" + i2 + "日",NetUtilsActivity.this);
 			}
 		});
+		
+		//bt1
+		binding.btNet1.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				bt1Click();
+			}
+		});
+		
+		//bt2
+		binding.btNet2.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				bt2Click();
+			}
+		});
 	}
-
+	
 	/**初始化为当前时间**/
 	private void initValue() {
 		Calendar calender = Calendar.getInstance();
@@ -60,11 +68,10 @@ public class NetUtilsActivity extends BaseActivity {
 		month = calender.get(Calendar.MONTH);
 		day = calender.get(Calendar.DATE);
 	}
-
+	
 	/***
 	 * 查看是否有网
 	 */
-	@OnClick(R.id.bt_net1)
 	public void bt1Click(){
 		if(NetUtils.isNetWorkConnected(this)){
 			HuToast.show("有网",this);
@@ -72,11 +79,10 @@ public class NetUtilsActivity extends BaseActivity {
 			HuToast.show("无网",this);
 		}
 	}
-
+	
 	/***
 	 * 查看是否连接wifi
 	 */
-	@OnClick(R.id.bt_net2)
 	public void bt2Click(){
 		if(NetUtils.isWifiConnected(this)){
 			HuToast.show("连接wifi",this);
@@ -84,5 +90,5 @@ public class NetUtilsActivity extends BaseActivity {
 			HuToast.show("没有连接wifi",this);
 		}
 	}
-
+	
 }

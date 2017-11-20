@@ -1,67 +1,48 @@
 package com.example.huchenzhang.myutils.swiperefresh;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
-import com.aspsine.swipetoloadlayout.OnRefreshListener;
-import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.example.huchenzhang.myutils.BaseActivity;
 import com.example.huchenzhang.myutils.R;
-import butterknife.Bind;
-import butterknife.ButterKnife;
+import com.example.huchenzhang.myutils.databinding.SwipeRefreshActivityBinding;
+import com.example.huchenzhang.myutils.utils.HuToast;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 /**
- * 这个使用有点复杂，换下面这个地址
- * compile 'org.litepal.android:core:1.6.0'
+ * 上拉和下拉刷新
  */
 public class SwipeRefreshActivity extends BaseActivity {
-	@Bind(R.id.swipe_refresh_header)
-	SwipeRefreshHeaderView swipeRefreshHeader;
-	@Bind(R.id.swipe_load_more_footer)
-	SwipeRefreshFooterView swipeLoadMoreFooter;
-	@Bind(R.id.swipe_target)
-	TextView swipeTarget;
-	@Bind(R.id.swipeToLoad)
-	SwipeToLoadLayout swipeToLoad;
-	@Bind(R.id.lay_SwipeRefresh)
-	RelativeLayout SwipeRefresh;
-
-//	private SwipeRefreshFooterView swipeLoadMoreFooter;
-//	private SwipeRefreshHeaderView swipeRefreshHeader;
-//	private SwipeToLoadLayout swipeToLoad;
-
+	
+	private SwipeRefreshActivityBinding binding;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.swipe_refresh_activity);
-		ButterKnife.bind(this);
+		binding = DataBindingUtil.setContentView(this,R.layout.swipe_refresh_activity);
 		initView();
 	}
-
+	
+	/** 加载更多和刷新事件监听 */
 	private void initView() {
-//		swipeToLoad = (SwipeToLoadLayout) findViewById(R.id.swipeToLoad);
-//		swipeLoadMoreFooter = (SwipeRefreshFooterView) findViewById(R.id.swipe_load_more_footer);
-//		swipeRefreshHeader = (SwipeRefreshHeaderView) findViewById(R.id.swipe_refresh_header);
-
-		swipeRefreshHeader.setPadding(20, 20, 20, 20);
-		swipeRefreshHeader.setLayoutParams(new ViewGroup.MarginLayoutParams(ViewGroup.MarginLayoutParams.MATCH_PARENT,
-				ViewGroup.MarginLayoutParams.WRAP_CONTENT));
-		swipeToLoad.setRefreshHeaderView(swipeRefreshHeader);
-		swipeToLoad.setLoadMoreFooterView(swipeLoadMoreFooter);
-
-		swipeToLoad.setOnRefreshListener(new OnRefreshListener() {//下拉刷新
+		//加载更多
+		binding.refresh.setOnLoadmoreListener(new OnLoadmoreListener() {
 			@Override
-			public void onRefresh() {
-				swipeToLoad.setRefreshing(false);
+			public void onLoadmore(RefreshLayout refreshlayout) {
+				HuToast.show("加载更多",SwipeRefreshActivity.this);
+				if(binding.refresh.isLoading()){
+					binding.refresh.finishLoadmore();
+				}
 			}
 		});
-
-		swipeToLoad.setOnLoadMoreListener(new OnLoadMoreListener() {//上拉刷新
+		//刷新
+		binding.refresh.setOnRefreshListener(new OnRefreshListener() {
 			@Override
-			public void onLoadMore() {
-				swipeToLoad.setLoadingMore(false);
+			public void onRefresh(RefreshLayout refreshlayout) {
+				HuToast.show("刷新",SwipeRefreshActivity.this);
+				if(binding.refresh.isRefreshing()){
+					binding.refresh.finishRefresh();
+				}
 			}
 		});
 	}

@@ -1,14 +1,13 @@
 package com.example.huchenzhang.myutils.rxjava;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.widget.TextView;
 import com.example.huchenzhang.myutils.BaseActivity;
 import com.example.huchenzhang.myutils.R;
+import com.example.huchenzhang.myutils.databinding.RxJavaActivityBinding;
 import java.util.Timer;
 import java.util.TimerTask;
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -23,17 +22,13 @@ import io.reactivex.disposables.Disposable;
  */
 
 public class RxJava extends BaseActivity {
-	@Bind(R.id.tv_rx1)
-	TextView tvRx1;
-	@Bind(R.id.tv_rx2)
-	TextView tvRx2;
 	private int i = 1;
+	private RxJavaActivityBinding binding;
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.rx_java_activity);
-		ButterKnife.bind(this);
+		binding = DataBindingUtil.setContentView(this,R.layout.rx_java_activity);
 		initValue();
 	}
 
@@ -87,10 +82,10 @@ public class RxJava extends BaseActivity {
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				if(tvRx2 == null){
+				if(binding.tvRx2 == null){
 					return ;
 				}
-				tvRx2.setText(str+(i==0?"":i));
+				binding.tvRx2.setText(str+(i==0?"":i));
 				i = ++i;
 			}
 		});
@@ -110,10 +105,10 @@ public class RxJava extends BaseActivity {
 			runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
-					if(tvRx1 == null){
+					if(binding.tvRx1 == null){
 						return;
 					}
-					tvRx1.setText("我来发射数据" + (i==0?"":i));
+					binding.tvRx1.setText("我来发射数据" + (i==0?"":i));
 					e.onNext("我来发射数据" + (i==0?"":i));
 				}
 			});
