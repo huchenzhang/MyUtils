@@ -29,7 +29,7 @@ public class SwipeRefreshActivity extends BaseActivity {
 		binding.refresh.setOnLoadmoreListener(new OnLoadmoreListener() {
 			@Override
 			public void onLoadmore(RefreshLayout refreshlayout) {
-				HuToast.show("加载更多",SwipeRefreshActivity.this);
+				HuToast.show("上拉加载更多",SwipeRefreshActivity.this);
 				if(binding.refresh.isLoading()){
 					binding.refresh.finishLoadmore();
 				}
@@ -39,7 +39,7 @@ public class SwipeRefreshActivity extends BaseActivity {
 		binding.refresh.setOnRefreshListener(new OnRefreshListener() {
 			@Override
 			public void onRefresh(RefreshLayout refreshlayout) {
-				HuToast.show("刷新",SwipeRefreshActivity.this);
+				HuToast.show("下拉刷新",SwipeRefreshActivity.this);
 				if(binding.refresh.isRefreshing()){
 					binding.refresh.finishRefresh();
 				}

@@ -2,10 +2,8 @@ package com.example.huchenzhang.myutils;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.view.View;
-
 import com.example.huchenzhang.myutils.databinding.ActivityMainBinding;
 import com.example.huchenzhang.myutils.myDataBinding.MyDataBindingActivity;
 import com.example.huchenzhang.myutils.netUtils.NetUtilsActivity;
@@ -20,7 +18,6 @@ public class MainActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
 		binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 		initListener();
 	}
