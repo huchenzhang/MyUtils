@@ -4,7 +4,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'io.fabric'
-
 //这是编译文件中最大的代码块，关于android的所有特殊配置都在这里。
 android {
     compileSdkVersion 25
@@ -54,7 +53,7 @@ android {
             signingConfig signingConfigs.signConfig
         }
     }
-    dataBinding{
+    dataBinding {
         enabled = true
     }
     crashlytics {
@@ -120,13 +119,11 @@ android {
         compile 'com.aliyun.ams:alicloud-android-hotfix:3.1.6'
     }
 }
-
-
-
-
 //属于gradle的依赖配置，定义了当前项目所需要的依赖的其它库
 static def releaseTime() {
     return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC"))
 }
 
-
+dependencies {
+    compile files('libs/com.baidu.tts_2.3.1.20170808_e39ea89.jar')
+}

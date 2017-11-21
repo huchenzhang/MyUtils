@@ -11,6 +11,7 @@ import com.example.huchenzhang.myutils.recyclerview.MyRecyclerView;
 import com.example.huchenzhang.myutils.rxjava.RxJava;
 import com.example.huchenzhang.myutils.swiperefresh.SwipeRefreshActivity;
 import com.example.huchenzhang.myutils.xuliehao.XuLieHao;
+import com.example.huchenzhang.myutils.yuyin.YuYinActivity;
 
 public class MainActivity extends BaseActivity {
 	
@@ -71,6 +72,15 @@ public class MainActivity extends BaseActivity {
 				goDataBind();
 			}
 		});
+		
+		//百度语音合成
+		binding.btYuyin.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				goYuYin();
+			}
+		});
+		
 	}
 	
 	/***
@@ -126,6 +136,16 @@ public class MainActivity extends BaseActivity {
 	public void goDataBind() {
 		Intent intent = new Intent();
 		intent.setClass(this, MyDataBindingActivity.class);
+		startActivity(intent);
+	}
+	
+	
+	/***
+	 * 百度语音合成
+	 */
+	public void goYuYin() {
+		Intent intent = new Intent();
+		intent.setClass(this, YuYinActivity.class);
 		startActivity(intent);
 	}
 }

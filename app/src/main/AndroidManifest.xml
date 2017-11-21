@@ -10,6 +10,12 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- 外部存储读权限，调试工具加载本地补丁需要 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <!--百度语音合成权限相关-->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
 
     <application
         android:allowBackup="true"
@@ -44,6 +50,8 @@
         <activity android:name=".myhttp.OkHttp"/>
 
         <activity android:name=".myDataBinding.MyDataBindingActivity"/>
+
+        <activity android:name=".yuyin.YuYinActivity"/>
 
         <activity android:name=".keepalive.HooliganActivity"
                   android:configChanges="keyboardHidden|orientation|screenSize|navigation|keyboard"

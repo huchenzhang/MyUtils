@@ -23,3 +23,8 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+
+#百度语音合成
+-keep class com.baidu.tts.**{*;}
+-keep class com.baidu.speechsynthesizer.**{*;}

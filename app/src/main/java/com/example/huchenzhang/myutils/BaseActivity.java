@@ -1,6 +1,5 @@
 package com.example.huchenzhang.myutils;
 
-import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
@@ -18,7 +17,8 @@ import com.example.huchenzhang.myutils.netUtils.NetUtils;
 
 public abstract class BaseActivity extends AppCompatActivity {
 	
-	private NetUtils mNetUtils = new NetUtils();
+	private NetUtils mNetUtils = new NetUtils();//网络广播
+	private BootCompleteReceiver screen = new BootCompleteReceiver();//锁屏广播
 	
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,6 +38,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 		super.onDestroy();
 		//取消注册广播
 		unregisterReceiver(mNetUtils);
+		unregisterReceiver(screen);
 	}
 	
 	
@@ -69,11 +70,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 	 * 监听锁屏和解锁通知，不能静态注册广播，只能动态注册
 	 */
 	private void registerScreen() {
-		BroadcastReceiver broadcastReceiver = new BootCompleteReceiver();
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(Intent.ACTION_SCREEN_ON);
 		filter.addAction(Intent.ACTION_SCREEN_OFF);
-		registerReceiver(broadcastReceiver, filter);
+		registerReceiver(screen, filter);
 	}
 	
 	/**

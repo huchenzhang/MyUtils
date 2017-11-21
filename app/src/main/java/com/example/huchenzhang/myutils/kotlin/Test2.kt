@@ -63,6 +63,7 @@ fun test6(vararg v:Int){
     for (vt in v){
         print("  test6 = " + vt)
     }
+    v.map { print("  test6 = " + it) }
 }
 
 
@@ -88,6 +89,8 @@ fun main(args: Array<String>){
     val test7:(Int,Int) -> Int = {x , y -> x + y}
     print("test7(lambda) = " + test7(1,2))
     print("\n")
+
+    var list= listOf<String>("")
 
 }
 
