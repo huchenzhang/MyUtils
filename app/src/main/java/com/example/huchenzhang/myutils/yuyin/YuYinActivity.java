@@ -16,6 +16,7 @@ import com.baidu.tts.client.TtsMode;
 import com.example.huchenzhang.myutils.BaseActivity;
 import com.example.huchenzhang.myutils.R;
 import com.example.huchenzhang.myutils.databinding.YuYinActivityBinding;
+import com.example.huchenzhang.myutils.utils.HuToast;
 
 import java.util.ArrayList;
 
@@ -107,7 +108,7 @@ public class YuYinActivity  extends BaseActivity {
 			
 			@Override
 			public void onError(String s, SpeechError speechError) {
-				Log.e("语音出错了：","" + speechError.code);
+				HuToast.show("语音出错了：" + speechError.code,YuYinActivity.this);
 			}
 		});
 		
@@ -120,7 +121,11 @@ public class YuYinActivity  extends BaseActivity {
 		mSpeechSynthesizer.setApiKey(AppKey,AppSecret);
 //		mSpeechSynthesizer.auth(TtsMode.ONLINE);  // 纯在线
 		mSpeechSynthesizer.auth(TtsMode.MIX); // 离在线混合
-		mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_SPEAKER, "0"); // 设置发声的人声音，在线生效
+		mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_MIX_MODE, SpeechSynthesizer.MIX_MODE_HIGH_SPEED_SYNTHESIZE);
+		// MIX_MODE_DEFAULT 默认 ，wifi状态下使用在线，非wifi离线。在线状态下，请求超时6s自动转离线
+		// MIX_MODE_HIGH_SPEED_SYNTHESIZE_WIFI wifi状态下使用在线，非wifi离线。在线状态下， 请求超时1.2s自动转离线
+		// MIX_MODE_HIGH_SPEED_NETWORK ， 3G 4G wifi状态下使用在线，其它状态离线。在线状态下，请求超时1.2s自动转离线
+		// MIX_MODE_HIGH_SPEED_SYNTHESIZE, 2G 3G 4G wifi状态下使用在线，其它状态离线。在线状态下，请求超时1.2s自动转离线
 		mSpeechSynthesizer.initTts(TtsMode.MIX);
 	}
 	
