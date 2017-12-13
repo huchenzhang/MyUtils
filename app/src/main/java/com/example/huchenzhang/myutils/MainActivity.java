@@ -9,6 +9,8 @@ import com.example.huchenzhang.myutils.myDataBinding.MyDataBindingActivity;
 import com.example.huchenzhang.myutils.netUtils.NetUtilsActivity;
 import com.example.huchenzhang.myutils.recyclerview.MyRecyclerView;
 import com.example.huchenzhang.myutils.rxjava.RxJava;
+import com.example.huchenzhang.myutils.share.Share;
+import com.example.huchenzhang.myutils.svg.Svg;
 import com.example.huchenzhang.myutils.swiperefresh.SwipeRefreshActivity;
 import com.example.huchenzhang.myutils.xuliehao.XuLieHao;
 import com.example.huchenzhang.myutils.yuyin.YuYinActivity;
@@ -16,6 +18,7 @@ import com.example.huchenzhang.myutils.yuyin.YuYinActivity;
 public class MainActivity extends BaseActivity {
 	
 	private ActivityMainBinding binding;
+	private Intent intent = new Intent();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -81,13 +84,27 @@ public class MainActivity extends BaseActivity {
 			}
 		});
 		
+		//svg
+		binding.btSvg.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				goSvg();
+			}
+		});
+		
+		//share
+		binding.btShare.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				goShare();
+			}
+		});
 	}
 	
 	/***
 	 * 网络监测
 	 */
 	public void goNetWorkActivity() {
-		Intent intent = new Intent();
 		intent.setClass(this, NetUtilsActivity.class);
 		startActivity(intent);
 	}
@@ -96,7 +113,6 @@ public class MainActivity extends BaseActivity {
 	 * 获取手机序列号及uuid
 	 */
 	public void getUUid() {
-		Intent intent = new Intent();
 		intent.setClass(this, XuLieHao.class);
 		startActivity(intent);
 	}
@@ -105,7 +121,6 @@ public class MainActivity extends BaseActivity {
 	 * 上拉下拉刷新
 	 */
 	public void goSwipeRefresh() {
-		Intent intent = new Intent();
 		intent.setClass(this, SwipeRefreshActivity.class);
 		startActivity(intent);
 	}
@@ -114,7 +129,6 @@ public class MainActivity extends BaseActivity {
 	 * RecyclerView
 	 */
 	public void goRecyclerView() {
-		Intent intent = new Intent();
 		intent.setClass(this, MyRecyclerView.class);
 		startActivity(intent);
 	}
@@ -124,7 +138,6 @@ public class MainActivity extends BaseActivity {
 	 * RxJava
 	 */
 	public void goRxJavaView() {
-		Intent intent = new Intent();
 		intent.setClass(this, RxJava.class);
 		startActivity(intent);
 	}
@@ -134,7 +147,6 @@ public class MainActivity extends BaseActivity {
 	 * DataBinding
 	 */
 	public void goDataBind() {
-		Intent intent = new Intent();
 		intent.setClass(this, MyDataBindingActivity.class);
 		startActivity(intent);
 	}
@@ -144,8 +156,25 @@ public class MainActivity extends BaseActivity {
 	 * 百度语音合成
 	 */
 	public void goYuYin() {
-		Intent intent = new Intent();
 		intent.setClass(this, YuYinActivity.class);
+		startActivity(intent);
+	}
+	
+	
+	/***
+	 * svg
+	 */
+	public void goSvg() {
+		intent.setClass(this, Svg.class);
+		startActivity(intent);
+	}
+	
+	
+	/***
+	 * share
+	 */
+	public void goShare() {
+		intent.setClass(this, Share.class);
 		startActivity(intent);
 	}
 }

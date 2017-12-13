@@ -25,11 +25,6 @@ val b : Int = 2
  */
 val c = 3
 
-/** 如果不在声明时初始化，必须提供变量类型 **/
-//val d : Int
-//d = 1
-
-
 
 /**
  * 方法默认作用域为包下
@@ -61,11 +56,30 @@ public fun test5(a: Int,b: Int){
  * for循环里不需要指定对象类型 **/
 fun test6(vararg v:Int){
     for (vt in v){
-        print("  test6 = " + vt)
+        print("test6 = " + vt)
     }
-    v.map { print("  test6 = " + it) }
+    v.map { print("test6 = " + it) }
 }
 
+/***
+ * 可变变量定义：var 关键字
+ * 不可变变量定义：val 关键字，只能赋值一次的变量(类似Java中final修饰的变量)
+ * */
+fun test8(b: Int) : Unit{
+    var a = b
+    val s1 = "a is $a"
+
+    a = 2
+    val s2 = "${s1.replace("is", "was")}, but now is $a"
+    print(" test7 = "+ s1)
+    print("\n")
+    print(" test7 = "+ s2)
+}
+
+fun test9(b:String){
+    var a:String? = ""
+    a?.let { print("kkkk") }
+}
 
 fun main(args: Array<String>){
     //带返回值，返回int
@@ -89,8 +103,9 @@ fun main(args: Array<String>){
     val test7:(Int,Int) -> Int = {x , y -> x + y}
     print("test7(lambda) = " + test7(1,2))
     print("\n")
+    test8(1)
 
-    var list= listOf<String>("")
+    var list = listOf("")
 
 }
 

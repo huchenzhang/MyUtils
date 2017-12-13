@@ -9,6 +9,10 @@ import com.crashlytics.android.ndk.CrashlyticsNdk;
 import com.taobao.sophix.PatchStatus;
 import com.taobao.sophix.SophixManager;
 import com.taobao.sophix.listener.PatchLoadStatusListener;
+import com.umeng.socialize.Config;
+import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareConfig;
 
 import java.lang.reflect.Method;
 
@@ -29,10 +33,21 @@ public class Application extends android.app.Application{
 		Crashlytics.setBool("DEBUG", BuildConfig.DEBUG);
 		Crashlytics.setString("FLAVOR", BuildConfig.FLAVOR);
 		Crashlytics.setString("序列号",getSerialNumber());
+		
 		//阿里热修复：queryAndLoadNewPatch不可放在attachBaseContext 中，否则无网络权限，建议放在后面任意时刻，如onCreate中
 		//该方法主要用于查询服务器是否有新的可用补丁
 		SophixManager.getInstance().queryAndLoadNewPatch();
 		Application.context = getApplicationContext();
+		
+		//友盟初始化
+		UMShareAPI.get(this);
+		Config.DEBUG = true;
+	}
+	
+	{
+		PlatformConfig.setWeixin("","");
+		PlatformConfig.setQQZone("1106526385","R5LaY71Uph13LAbc");
+		PlatformConfig.setSinaWeibo("","","");
 	}
 	
 	public static Context getAppContext() {
@@ -53,4 +68,5 @@ public class Application extends android.app.Application{
 		}
 		return serial;
 	}
+	
 }

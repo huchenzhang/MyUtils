@@ -52,7 +52,7 @@ public class YuYinActivity  extends BaseActivity {
 				Manifest.permission.ACCESS_WIFI_STATE,
 				Manifest.permission.CHANGE_WIFI_STATE
 		};
-		ArrayList<String> toApplyList = new ArrayList<String>();
+		ArrayList<String> toApplyList = new ArrayList<>();
 		for (String perm : permissions) {
 			if (PackageManager.PERMISSION_GRANTED != ContextCompat.checkSelfPermission(this, perm)) {
 				toApplyList.add(perm);

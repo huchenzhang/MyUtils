@@ -15,7 +15,12 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-
+    <!--友盟分享相关权限-->
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
 
     <application
         android:allowBackup="true"
@@ -36,30 +41,89 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="4f0e7eb35bb87be9875b1eec420f6c227faa7528" />
+        <!--友盟-->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5a2deb1bb27b0a28670001d9" >
+        </meta-data>
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
 
-        <activity android:name=".netUtils.NetUtilsActivity"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
-        <activity android:name=".xuliehao.XuLieHao"/>
+                <data android:scheme="tencent1106526385" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+        <activity
+            android:name="com.umeng.socialize.editorpage.ShareActivity"
+            android:theme="@style/Theme.UMDefault"
+            android:excludeFromRecents="true"
+            />
 
-        <activity android:name=".swiperefresh.SwipeRefreshActivity"/>
+        <activity
+            android:name=".netUtils.NetUtilsActivity"
+            android:label="@string/NetUtils"/>
 
-        <activity android:name=".recyclerview.MyRecyclerView"/>
+        <activity
+            android:name=".xuliehao.XuLieHao"
+            android:label="@string/xuLieHao"/>
 
-        <activity android:name=".rxjava.RxJava"/>
+        <activity
+            android:name=".swiperefresh.SwipeRefreshActivity"
+            android:label="@string/swipeRefresh"/>
 
-        <activity android:name=".myhttp.OkHttp"/>
+        <activity
+            android:name=".recyclerview.MyRecyclerView"
+            android:label="@string/recyclerView"/>
 
-        <activity android:name=".myDataBinding.MyDataBindingActivity"/>
+        <activity
+            android:name=".rxjava.RxJava"
+            android:label="@string/rxJava"/>
 
-        <activity android:name=".yuyin.YuYinActivity"/>
+        <activity
+            android:name=".myhttp.OkHttp"
+            android:label="@string/okHttp"/>
 
-        <activity android:name=".keepalive.HooliganActivity"
-                  android:configChanges="keyboardHidden|orientation|screenSize|navigation|keyboard"
-                  android:excludeFromRecents="true"
-                  android:exported="false"
-                  android:finishOnTaskLaunch="false"
-                  android:launchMode="singleInstance"
-                  android:theme="@style/HooliganActivityStyle"/>
+        <activity
+            android:name=".myDataBinding.MyDataBindingActivity"
+            android:label="@string/dataBinding"/>
+
+        <activity
+            android:name=".yuyin.YuYinActivity"
+            android:label="@string/yuyin"/>
+
+        <activity
+            android:name=".svg.Svg"
+            android:label="@string/svg"/>
+
+        <activity
+            android:name=".share.Share"
+            android:label="@string/share"/>
+
+        <activity
+            android:name=".keepalive.HooliganActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|navigation|keyboard"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:finishOnTaskLaunch="false"
+            android:launchMode="singleInstance"
+            android:theme="@style/HooliganActivityStyle"/>
 
     </application>
 

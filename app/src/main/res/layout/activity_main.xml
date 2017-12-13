@@ -53,5 +53,17 @@
             android:layout_height="wrap_content"
             android:text="@string/yuyin"/>
 
+        <Button
+            android:id="@+id/bt_svg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/svg"/>
+
+        <Button
+            android:id="@+id/bt_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/share"/>
+
     </GridLayout>
 </layout>

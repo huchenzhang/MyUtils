@@ -18,6 +18,10 @@ android {
         versionCode Integer.parseInt(VERSION_CODE)
         versionName VERSION_NAME
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //兼容svg图
+        vectorDrawables.useSupportLibrary = true
+        //适配gradle:3.0以上版本
+        flavorDimensions VERSION_CODE
     }
     //打包时用的签名和密码
     signingConfigs {
@@ -75,55 +79,56 @@ android {
 
     //自定义apk安装包名
     applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            output.outputFile = new File(
-                    output.outputFile.parent + "/${variant.buildType.name}",
-                    "测试-${variant.buildType.name}-v${variant.versionName}-${variant.productFlavors[0].name}-${releaseTime()}.apk".toLowerCase())
+        variant.outputs.all { output ->
+            outputFileName = "测试-${variant.buildType.name}-v${variant.versionName}-${variant.productFlavors[0].name}-${releaseTime()}.apk".toLowerCase()
         }
-    }
-
-    dependencies {
-        compile fileTree(include: ['*.jar'], dir: 'libs')
-        androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-            exclude group: 'com.android.support', module: 'support-annotations'
-        })
-        compile 'com.android.support:appcompat-v7:25.4'
-        compile 'com.android.support:design:25.4.0'
-        compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
-        testCompile 'junit:junit:4.12'
-        //数据库相关
-        compile 'org.litepal.android:core:1.6.0'
-        //上拉下拉刷新
-        compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
-        //recyclerview
-        compile 'com.android.support:recyclerview-v7:25.4.0'
-        //gridlayout
-        compile 'com.android.support:gridlayout-v7:25.4.0'
-        //异步
-        compile 'io.reactivex.rxjava2:rxjava:2.0.5'
-        //广播
-        compile 'com.parse.bolts:bolts-android:1.4.0'
-        //网络
-        compile 'com.squareup.okhttp3:okhttp:3.7.0'
-        compile 'com.squareup.okio:okio:1.12.0'
-        //kotlin
-        compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-        //fabric，崩溃检测，用户量统计
-        compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
-            transitive = true
-        }
-        compile('com.crashlytics.sdk.android:crashlytics-ndk:1.1.6@aar') {
-            transitive = true
-        }
-        //阿里云Sophix热修复
-        compile 'com.aliyun.ams:alicloud-android-hotfix:3.1.6'
     }
 }
+
 //属于gradle的依赖配置，定义了当前项目所需要的依赖的其它库
 static def releaseTime() {
     return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC"))
 }
 
+//百度语音合成
 dependencies {
     compile files('libs/com.baidu.tts_2.3.1.20170808_e39ea89.jar')
+    implementation files('libs/SocialSDK_QQ_Simplify.jar')
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.4'
+    compile 'com.android.support:design:25.4.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
+    testCompile 'junit:junit:4.12'
+    //数据库相关
+    compile 'org.litepal.android:core:1.6.0'
+    //上拉下拉刷新
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
+    //recyclerview
+    compile 'com.android.support:recyclerview-v7:25.4.0'
+    //gridlayout
+    compile 'com.android.support:gridlayout-v7:25.4.0'
+    //异步
+    compile 'io.reactivex.rxjava2:rxjava:2.0.5'
+    //广播
+    compile 'com.parse.bolts:bolts-android:1.4.0'
+    //网络
+    compile 'com.squareup.okhttp3:okhttp:3.7.0'
+    compile 'com.squareup.okio:okio:1.12.0'
+    //kotlin
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    //fabric，崩溃检测，用户量统计
+    compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
+        transitive = true
+    }
+    compile('com.crashlytics.sdk.android:crashlytics-ndk:1.1.6@aar') {
+        transitive = true
+    }
+    //阿里云Sophix热修复
+    compile 'com.aliyun.ams:alicloud-android-hotfix:3.1.6'
 }
