@@ -76,7 +76,7 @@ fun test8(b: Int) : Unit{
     print(" test7 = "+ s2)
 }
 
-fun test9(b:String){
+fun test9(){
     var a:String? = ""
     a?.let { print("kkkk") }
 }
@@ -105,7 +105,7 @@ fun main(args: Array<String>){
     print("\n")
     test8(1)
 
-    var list = listOf("")
+//    var list = listOf("")
 
 }
 

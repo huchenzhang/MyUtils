@@ -103,7 +103,7 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.4'
     compile 'com.android.support:design:25.4.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
+    compile 'com.android.support.constraint:constraint-layout:1.1.0-beta3'
     testCompile 'junit:junit:4.12'
     //数据库相关
     compile 'org.litepal.android:core:1.6.0'
@@ -131,4 +131,8 @@ dependencies {
     }
     //阿里云Sophix热修复
     compile 'com.aliyun.ams:alicloud-android-hotfix:3.1.6'
+    //gson
+    compile 'com.google.code.gson:gson:2.8.0'
+    //picasso图片处理
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }

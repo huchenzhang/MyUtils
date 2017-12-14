@@ -15,11 +15,16 @@ import com.example.huchenzhang.myutils.R;
 import com.example.huchenzhang.myutils.databinding.ShareActivityBinding;
 import com.example.huchenzhang.myutils.utils.HuToast;
 import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
+
+import org.json.JSONArray;
+
+import java.util.Map;
 
 /**
  * 第三方分享
@@ -28,13 +33,15 @@ import com.umeng.socialize.media.UMWeb;
 
 public class Share extends BaseActivity{
 	private ShareActivityBinding binding;
+	private UMShareAPI mShareAPI;
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		binding = DataBindingUtil.setContentView(this, R.layout.share_activity);
+		mShareAPI = UMShareAPI.get(this);
 		initView();
 	}
-	
+
 	/**
 	 * 如果大于android6.0 需要检查权限
 	 * 否则直接分享
@@ -59,9 +66,9 @@ public class Share extends BaseActivity{
 //			ShareImage(string,string);
 			ShareWeb(string);
 		}
-		
+
 	}
-	
+
 	/**
 	 * 权限申请后的回调
 	 * @param requestCode
@@ -78,7 +85,7 @@ public class Share extends BaseActivity{
 			HuToast.show("请通过所有权限",this);
 		}
 	}
-	
+
 	/** 初始化view */
 	private void initView(){
 		//分享按钮点击事件
@@ -89,7 +96,7 @@ public class Share extends BaseActivity{
 				initPermission();
 			}
 		});
-		
+
 		//登陆按钮点击事件
 		binding.btLogin.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -98,7 +105,7 @@ public class Share extends BaseActivity{
 			}
 		});
 	}
-	
+
 	/** 分享 */
 	private void ShareText(){
 		//不带面板，直接分享
@@ -107,17 +114,17 @@ public class Share extends BaseActivity{
 //				.withText("hello")//分享内容
 //				.setCallback(shareListener)//回调监听器
 //				.share();
-		
+
 		//带面板，选择平台进行分享
 		new ShareAction(this)
 				.withText("hello")
 				.setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
 				.setCallback(shareListener)
 				.open();
-		
-		
+
+
 	}
-	
+
 	/***
 	 * 分享图片
 	 * @param image 图片地址
@@ -137,17 +144,17 @@ public class Share extends BaseActivity{
 //				.setCallback(shareListener)
 //				.withText("蕾姆")
 //				.open();
-		
-			UMImage pic = new UMImage(this,R.drawable.a);
-			pic.setThumb(new UMImage(this,R.drawable.a));
-			new ShareAction(this)
-					.withMedia(pic)
-					.setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
-					.setCallback(shareListener)
-					.withText("")
-					.open();
+
+		UMImage pic = new UMImage(this,R.drawable.a);
+		pic.setThumb(new UMImage(this,R.drawable.a));
+		new ShareAction(this)
+				.withMedia(pic)
+				.setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+				.setCallback(shareListener)
+				.withText("")
+				.open();
 	}
-	
+
 	/***
 	 * 分享链接
 	 * @param thumb_img 缩略图
@@ -164,24 +171,26 @@ public class Share extends BaseActivity{
 				.setCallback(shareListener)
 				.open();
 	}
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
+		UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+
 	}
-	
-	/** 登陆 */
+
+	/** QQ登陆 */
 	private void login(){
-	
+		mShareAPI.getPlatformInfo(this, SHARE_MEDIA.QQ, umAuthListener);
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		UMShareAPI.get(this).release();
 	}
-	
-	
+
+	/** 第三方分享回调 **/
 	private UMShareListener shareListener = new UMShareListener() {
 		/**
 		 * @descrption 分享开始的回调
@@ -189,8 +198,13 @@ public class Share extends BaseActivity{
 		 */
 		@Override
 		public void onStart(SHARE_MEDIA platform) {
+			//开始分享的时候，判断是或否已经安装了客户端
+			boolean a = mShareAPI.isInstall(Share.this, SHARE_MEDIA.QQ);
+			if (!a){
+				HuToast.show("请安装QQ再进行分享",Share.this);
+			}
 		}
-		
+
 		/**
 		 * @descrption 分享成功的回调
 		 * @param platform 平台类型
@@ -199,7 +213,7 @@ public class Share extends BaseActivity{
 		public void onResult(SHARE_MEDIA platform) {
 			Toast.makeText(Share.this,"成功了",Toast.LENGTH_LONG).show();
 		}
-		
+
 		/**
 		 * @descrption 分享失败的回调
 		 * @param platform 平台类型
@@ -209,7 +223,7 @@ public class Share extends BaseActivity{
 		public void onError(SHARE_MEDIA platform, Throwable t) {
 			Toast.makeText(Share.this,"失败"+t.getMessage(),Toast.LENGTH_LONG).show();
 		}
-		
+
 		/**
 		 * @descrption 分享取消的回调
 		 * @param platform 平台类型
@@ -217,8 +231,36 @@ public class Share extends BaseActivity{
 		@Override
 		public void onCancel(SHARE_MEDIA platform) {
 			Toast.makeText(Share.this,"取消了",Toast.LENGTH_LONG).show();
-			
+
 		}
 	};
-	
+
+
+	/** 第三方登陆回调 **/
+	private UMAuthListener umAuthListener = new UMAuthListener() {
+		@Override
+		public void onStart(SHARE_MEDIA platform) {
+			//授权开始的回调
+			//开始分享的时候，判断是或否已经安装了客户端
+			boolean a = mShareAPI.isInstall(Share.this, SHARE_MEDIA.QQ);
+			if (!a){
+				HuToast.show("请安装QQ再进行分享",Share.this);
+			}
+		}
+		@Override
+		public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
+			Toast.makeText(getApplicationContext(), "Authorize succeed", Toast.LENGTH_SHORT).show();
+		}
+
+		@Override
+		public void onError(SHARE_MEDIA platform, int action, Throwable t) {
+			Toast.makeText( getApplicationContext(), "Authorize fail", Toast.LENGTH_SHORT).show();
+		}
+
+		@Override
+		public void onCancel(SHARE_MEDIA platform, int action) {
+			Toast.makeText( getApplicationContext(), "Authorize cancel", Toast.LENGTH_SHORT).show();
+		}
+	};
+
 }
