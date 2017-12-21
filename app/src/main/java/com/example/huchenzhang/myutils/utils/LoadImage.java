@@ -13,8 +13,8 @@ import com.squareup.picasso.Picasso;
 
 public class LoadImage {
 
-    @BindingAdapter({"bind:imageUrl", "bind:error"})
-    public static void loadImage(ImageView view, String url, Drawable error) {
-        Picasso.with(view.getContext()).load(url).error(error).into(view);
-    }
+//    @BindingAdapter({"bind:imageUrl", "bind:error"})
+//    public static void loadImage(ImageView view, String url, Drawable error) {
+//        Picasso.with(view.getContext()).load(url).error(error).into(view);
+//    }
 }

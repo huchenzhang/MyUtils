@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import com.example.huchenzhang.myutils.BaseActivity;
 import com.example.huchenzhang.myutils.R;
 import com.example.huchenzhang.myutils.databinding.RxJavaActivityBinding;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import io.reactivex.Observable;
@@ -19,6 +21,7 @@ import io.reactivex.disposables.Disposable;
  * http://www.jianshu.com/p/d149043d103a
  * RxJava
  * Created by hu on 2017/5/2.
+ * 一个被观察者可以有多个观察者
  */
 
 public class RxJava extends BaseActivity {
@@ -29,19 +32,32 @@ public class RxJava extends BaseActivity {
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		binding = DataBindingUtil.setContentView(this,R.layout.rx_java_activity);
-		initValue();
+//		initValue1();
+		initValue2();
 	}
 
-	private void initValue() {
+	/** 测试二 **/
+	private void initValue2(){
+		Integer[] numbers = {1,2,3,4,5,6,7};
+		List<Integer> lists = Arrays.asList(numbers);
+	}
+
+
+
+	/** 测试一 **/
+	private void initValue1() {
 		final Timer timer = new Timer();
 		//Observable的创建，被观察者
+		//Observable的创建方式有很多种，见官网：https://github.com/ReactiveX/RxJava/wiki/Creating-Observables
 		Observable<Object> obServable = Observable.create(new ObservableOnSubscribe<Object>() {
+			//subscribe()有多个重载的方法
 			@Override
 			public void subscribe(final ObservableEmitter<Object> e) throws Exception {
 				//执行一些其他操作
 				//*************
 				//执行完毕后，触发回调，通知观察者
-				timer.schedule(new TimeTask(e),1000,1000);//param:第一个long是首次执行的延时事件，第二个是每隔多长时间执行一次
+				timer.schedule(new TimeTask(e),1000,1000);
+				//param:第一个long是首次执行的延时事件，第二个是每隔多长时间执行一次
 			}
 		});
 
@@ -71,7 +87,15 @@ public class RxJava extends BaseActivity {
 			}
 		};
 
+		//通过Subscribe绑定两者关系
 		obServable.subscribe(obServer);
+		//指定线程，被观察者指定为子线程，观察者指定为主线程
+		//subscribeOn()指定上游线程，第一次有效，多次指定以第一次指定为准
+		//observeOn()下游线程，多次指定，最后一次有效
+//		obServable
+// 				.subscribeOn(Schedulers.newThread())
+//				.observeOn(AndroidSchedulers.mainThread())
+//				.subscribe(obServer);
 	}
 
 	/***

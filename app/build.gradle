@@ -113,13 +113,23 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.4.0'
     //gridlayout
     compile 'com.android.support:gridlayout-v7:25.4.0'
-    //异步
+    //异步RxJava2
     compile 'io.reactivex.rxjava2:rxjava:2.0.5'
+    //RxJava2 Android
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    //RxJava2 Adapter
+    compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
     //广播
     compile 'com.parse.bolts:bolts-android:1.4.0'
     //网络
     compile 'com.squareup.okhttp3:okhttp:3.7.0'
     compile 'com.squareup.okio:okio:1.12.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    //retrofit
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    //Gson converter
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+
     //kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     //fabric，崩溃检测，用户量统计
