@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
 import com.example.huchenzhang.myutils.databinding.ActivityMainBinding;
+import com.example.huchenzhang.myutils.kotlin.Test3;
 import com.example.huchenzhang.myutils.myDataBinding.MyDataBindingActivity;
 import com.example.huchenzhang.myutils.netUtils.NetUtilsActivity;
 import com.example.huchenzhang.myutils.recyclerview.MyRecyclerView;
@@ -14,6 +15,7 @@ import com.example.huchenzhang.myutils.svg.Svg;
 import com.example.huchenzhang.myutils.swiperefresh.SwipeRefreshActivity;
 import com.example.huchenzhang.myutils.xuliehao.XuLieHao;
 import com.example.huchenzhang.myutils.yuyin.YuYinActivity;
+import com.example.huchenzhang.myutils.zxing.Zxing;
 
 public class MainActivity extends BaseActivity {
 	
@@ -99,6 +101,22 @@ public class MainActivity extends BaseActivity {
 				goShare();
 			}
 		});
+
+		//share
+		binding.btKotlin.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				goKotlin();
+			}
+		});
+
+		//share
+		binding.btZxing.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				goZxing();
+			}
+		});
 	}
 	
 	/***
@@ -175,6 +193,24 @@ public class MainActivity extends BaseActivity {
 	 */
 	public void goShare() {
 		intent.setClass(this, Share.class);
+		startActivity(intent);
+	}
+
+
+	/***
+	 * kotlin
+	 */
+	public void goKotlin() {
+		intent.setClass(this,Test3.class);
+		startActivity(intent);
+	}
+
+
+	/***
+	 * Zxing
+	 */
+	public void goZxing() {
+		intent.setClass(this, Zxing.class);
 		startActivity(intent);
 	}
 }

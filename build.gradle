@@ -2,7 +2,7 @@
 // 翻译：顶层的build.gradle，配置会应用到每个module中
 
 buildscript {
-    ext.kotlin_version = '1.1.60'
+    ext.kotlin_version = '1.2.30'
     repositories {
         jcenter()
         maven { url 'https://maven.fabric.io/public' }

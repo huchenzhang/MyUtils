@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -40,6 +41,25 @@ public class Share extends BaseActivity{
 		binding = DataBindingUtil.setContentView(this, R.layout.share_activity);
 		mShareAPI = UMShareAPI.get(this);
 		initView();
+	}
+
+	/**
+	 * 旋轉屏幕時保存數據
+	 * */
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		Bundle data = new Bundle();
+		outState.putAll(new Bundle());
+	}
+
+	/***
+	 * 旋轉屏幕后取出數據
+	 * @param savedInstanceState 數據
+	 */
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		super.onRestoreInstanceState(savedInstanceState);
 	}
 
 	/**
