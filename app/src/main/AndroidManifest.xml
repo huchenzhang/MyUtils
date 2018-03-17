@@ -129,9 +129,11 @@
             android:launchMode="singleInstance"
             android:theme="@style/HooliganActivityStyle"/>
 
-        <activity android:name=".kotlin.Test3" />
-        <activity android:name=".zxing.Zxing" />
-        <activity android:name=".zxing.ScanActivity" />
+        <activity android:name=".kotlin.Test3"
+            android:label="@string/kotlin"/>
+
+        <activity android:name=".zxing.Zxing"
+            android:label="@string/zxing"/>
 
     </application>
 

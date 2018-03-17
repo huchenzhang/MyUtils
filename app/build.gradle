@@ -6,7 +6,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'io.fabric'
 //这是编译文件中最大的代码块，关于android的所有特殊配置都在这里。
 android {
-    compileSdkVersion 25
+    compileSdkVersion 26
     buildToolsVersion '26.0.2'
     //程序默认配置，如果AndroidMainfest.xml里面定义了与这里相同的属性，会以这里为主
     defaultConfig {
@@ -14,7 +14,7 @@ android {
         //2.作为R文件的包名，改名不会报错
         applicationId "com.example.huchenzhang.myutils"
         minSdkVersion 19
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode Integer.parseInt(VERSION_CODE)
         versionName VERSION_NAME
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -75,6 +75,7 @@ android {
         maven {
             url "http://maven.aliyun.com/nexus/content/repositories/releases"
         }
+        maven { url 'https://jitpack.io' }
     }
 
     //自定义apk安装包名
@@ -101,18 +102,18 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.4'
-    compile 'com.android.support:design:25.4.0'
-    compile 'com.android.support.constraint:constraint-layout:1.1.0-beta3'
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:design:26.4.0'
+    compile 'com.android.support.constraint:constraint-layout:1.1.0-beta5'
     testCompile 'junit:junit:4.12'
     //数据库相关
     compile 'org.litepal.android:core:1.6.0'
     //上拉下拉刷新
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
     //recyclerview
-    compile 'com.android.support:recyclerview-v7:25.4.0'
+    compile 'com.android.support:recyclerview-v7:26.1.0'
     //gridlayout
-    compile 'com.android.support:gridlayout-v7:25.4.0'
+    compile 'com.android.support:gridlayout-v7:26.1.0'
     //异步RxJava2
     compile 'io.reactivex.rxjava2:rxjava:2.0.5'
     //RxJava2 Android
@@ -145,4 +146,9 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.0'
     //picasso图片处理
     compile 'com.squareup.picasso:picasso:2.5.2'
+    //权限管理
+    implementation 'com.yanzhenjie:permission:2.0.0-rc3'
+    //zxing扫二维码
+    implementation 'com.github.yuzhiqiang1993:zxing:2.1.4'
+
 }

@@ -10,9 +10,13 @@ import android.view.View;
 import com.example.huchenzhang.myutils.BaseActivity;
 import com.example.huchenzhang.myutils.R;
 import com.example.huchenzhang.myutils.databinding.ActivityZxingBinding;
-import com.yxp.permission.util.lib.PermissionUtil;
-import com.yxp.permission.util.lib.callback.PermissionOriginResultCallBack;
-
+import com.example.huchenzhang.myutils.utils.HuToast;
+import com.example.huchenzhang.myutils.utils.StringUtils;
+import com.yanzhenjie.permission.Action;
+import com.yanzhenjie.permission.AndPermission;
+import com.yzq.zxinglibrary.android.CaptureActivity;
+import com.yzq.zxinglibrary.bean.ZxingConfig;
+import com.yzq.zxinglibrary.common.Constant;
 import java.util.List;
 
 /**
@@ -22,6 +26,7 @@ import java.util.List;
 
 public class Zxing extends BaseActivity {
     private ActivityZxingBinding binding;
+    private int REQUEST_CODE_SCAN = 111;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,33 +39,61 @@ public class Zxing extends BaseActivity {
         binding.bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startQrCode();
+                checkPermission();
             }
         });
     }
 
+    /**
+     * 检查权限
+     */
+    private void checkPermission(){
+        AndPermission.with(this)
+                .permission(Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE)
+                .onGranted(new Action() {
+                    @Override
+                    public void onAction(List<String> permissions) {
+                        startQrCode();
+                    }
+                })
+                .onDenied(new Action() {
+                    @Override
+                    public void onAction(List<String> permissions) {
+                        HuToast.show("没权限",Zxing.this);
+                    }
+                })
+                .start();
+    }
+
     /** 开始扫码 */
     private void startQrCode() {
-        PermissionUtil.getInstance().request(this, new String[]{Manifest.permission.CAMERA}, new PermissionOriginResultCallBack() {
-            @Override
-            public void onResult(List<com.yxp.permission.util.lib.PermissionInfo> acceptList, List<com.yxp.permission.util.lib.PermissionInfo> rationalList, List<com.yxp.permission.util.lib.PermissionInfo> deniedList) {
+        Intent intent = new Intent(this, CaptureActivity.class);
+        ZxingConfig config = new ZxingConfig();
+        config.setPlayBeep(true);
+        config.setShake(true);
+        intent.putExtra(Constant.INTENT_ZXING_CONFIG,config);
 
-            }
-        });
+        startActivityForResult(intent,REQUEST_CODE_SCAN);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //扫描结果回调
-    }
+        if(requestCode == REQUEST_CODE_SCAN && resultCode == RESULT_OK){
+            if(data != null){
+                String str = data.getStringExtra(Constant.CODED_CONTENT);
+                if(StringUtils.WeChatToPay(str)){
+                    binding.tv1.setText(String.format("微信%s", str));
+                }else if(StringUtils.AlipayToPay(str)){
+                    binding.tv1.setText(String.format("支付宝%s", str));
+                }else{
+                    binding.tv1.setText(String.format("请扫描正确付款码%s", str));
+                }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
 
+            }
         }
-
     }
+
 }
