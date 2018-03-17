@@ -95,6 +95,10 @@ static def releaseTime() {
 dependencies {
     compile files('libs/com.baidu.tts_2.3.1.20170808_e39ea89.jar')
     implementation files('libs/SocialSDK_QQ_Simplify.jar')
+    implementation files('libs/alipay-sdk-java20180309170622-source.jar')
+    implementation files('libs/alipay-sdk-java20180309170622.jar')
+    implementation files('libs/commons-logging-1.1.1-sources.jar')
+    implementation files('libs/commons-logging-1.1.1.jar')
 }
 
 dependencies {
@@ -102,7 +106,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.android.support:design:26.4.0'
     compile 'com.android.support.constraint:constraint-layout:1.1.0-beta5'
     testCompile 'junit:junit:4.12'

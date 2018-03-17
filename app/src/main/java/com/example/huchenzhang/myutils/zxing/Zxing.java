@@ -4,9 +4,14 @@ import android.Manifest;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.AlipayClient;
+import com.alipay.api.DefaultAlipayClient;
+import com.alipay.api.domain.AlipayTradePayModel;
+import com.alipay.api.request.AlipayTradePayRequest;
+import com.alipay.api.response.AlipayTradePayResponse;
 import com.example.huchenzhang.myutils.BaseActivity;
 import com.example.huchenzhang.myutils.R;
 import com.example.huchenzhang.myutils.databinding.ActivityZxingBinding;
@@ -25,8 +30,10 @@ import java.util.List;
  */
 
 public class Zxing extends BaseActivity {
+
     private ActivityZxingBinding binding;
     private int REQUEST_CODE_SCAN = 111;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,18 +89,45 @@ public class Zxing extends BaseActivity {
         //扫描结果回调
         if(requestCode == REQUEST_CODE_SCAN && resultCode == RESULT_OK){
             if(data != null){
-                String str = data.getStringExtra(Constant.CODED_CONTENT);
+                final String str = data.getStringExtra(Constant.CODED_CONTENT);
                 if(StringUtils.WeChatToPay(str)){
                     binding.tv1.setText(String.format("微信%s", str));
                 }else if(StringUtils.AlipayToPay(str)){
                     binding.tv1.setText(String.format("支付宝%s", str));
+                    toAlipay(str);
+
                 }else{
                     binding.tv1.setText(String.format("请扫描正确付款码%s", str));
                 }
-
-
             }
         }
     }
+
+    /***
+     * 支付宝支付
+     * @param str 二维码的生成的字符串
+     */
+    private void toAlipay(String str){
+        //获得初始化的AlipayClient
+        AlipayClient alipayClient = new DefaultAlipayClient(PayHelper.gatewayUrl, PayHelper.app_id, PayHelper.merchant_private_key, PayHelper.format, PayHelper.charset, PayHelper.alipay_public_key, PayHelper.sign_type);
+        //创建API对应的request类
+        AlipayTradePayRequest request = new AlipayTradePayRequest(); //创建API对应的request类
+        AlipayTradePayModel model = new AlipayTradePayModel();
+        model.setOutTradeNo(System.currentTimeMillis()+"");
+        model.setScene("bar_code");
+        model.setAuthCode(str);
+        model.setSubject("Iphone6 16G");
+        model.setTotalAmount("0.01");
+        request.setBizModel(model);
+        //通过alipayClient调用API，获得对应的response类
+        AlipayTradePayResponse response = null;
+        try {
+            response = alipayClient.execute(request);
+            System.out.println("地址：" + response.getBody());
+        } catch (AlipayApiException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
