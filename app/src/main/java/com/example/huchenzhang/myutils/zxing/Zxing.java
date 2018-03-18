@@ -24,6 +24,7 @@ import com.yzq.zxinglibrary.bean.ZxingConfig;
 import com.yzq.zxinglibrary.common.Constant;
 import java.util.List;
 
+
 /**
  * 掃碼
  * Created by hu on 2018/3/16.
@@ -124,7 +125,7 @@ public class Zxing extends BaseActivity {
         try {
             response = alipayClient.execute(request);
             System.out.println("地址：" + response.getBody());
-        } catch (AlipayApiException e) {
+        } catch (NoClassDefFoundError | AlipayApiException e) {
             e.printStackTrace();
         }
     }
