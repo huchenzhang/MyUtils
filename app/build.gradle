@@ -6,16 +6,22 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'io.fabric'
 //这是编译文件中最大的代码块，关于android的所有特殊配置都在这里。
 android {
+    //编译版本sdk
     compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    //编译工具版本sdk-tool
+    buildToolsVersion '26.0.3'
     //程序默认配置，如果AndroidMainfest.xml里面定义了与这里相同的属性，会以这里为主
     defaultConfig {
         //1.作为程序唯一标示，防止同一个手机重复安装同一个应用。
         //2.作为R文件的包名，改名不会报错
         applicationId "com.example.huchenzhang.myutils"
+        //最低兼容版本
         minSdkVersion 19
+        //最高版本兼容
         targetSdkVersion 26
+        //版本号，例如：2
         versionCode Integer.parseInt(VERSION_CODE)
+        //版本名字，例如：2.0.1
         versionName VERSION_NAME
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         //兼容svg图
@@ -137,7 +143,7 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
 
     //kotlin
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     //fabric，崩溃检测，用户量统计
     compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
         transitive = true
@@ -155,5 +161,9 @@ dependencies {
     implementation 'com.yanzhenjie:permission:2.0.0-rc3'
     //zxing扫二维码
     implementation 'com.github.yuzhiqiang1993:zxing:2.1.4'
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.6.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+
 
 }
