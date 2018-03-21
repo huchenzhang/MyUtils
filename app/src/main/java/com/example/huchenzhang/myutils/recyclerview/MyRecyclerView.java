@@ -62,8 +62,6 @@ public class MyRecyclerView extends BaseActivity {
 			@Override
 			public void onLongClick(View view, int position) {
 				HuToast.show("长按了 " + position,MyRecyclerView.this);
-				//为了测试
-				throw new RuntimeException();
 			}
 		});
 	}

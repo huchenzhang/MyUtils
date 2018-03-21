@@ -32,8 +32,8 @@ public class RxJava extends BaseActivity {
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		binding = DataBindingUtil.setContentView(this,R.layout.rx_java_activity);
-//		initValue1();
-		initValue2();
+		initValue1();
+//		initValue2();
 	}
 
 	/** 测试二 **/
@@ -49,7 +49,7 @@ public class RxJava extends BaseActivity {
 		final Timer timer = new Timer();
 		//Observable的创建，被观察者
 		//Observable的创建方式有很多种，见官网：https://github.com/ReactiveX/RxJava/wiki/Creating-Observables
-		Observable<Object> obServable = Observable.create(new ObservableOnSubscribe<Object>() {
+		Observable.create(new ObservableOnSubscribe<Object>() {
 			//subscribe()有多个重载的方法
 			@Override
 			public void subscribe(final ObservableEmitter<Object> e) throws Exception {
@@ -59,36 +59,59 @@ public class RxJava extends BaseActivity {
 				timer.schedule(new TimeTask(e),1000,1000);
 				//param:第一个long是首次执行的延时事件，第二个是每隔多长时间执行一次
 			}
-		});
+		}).subscribe(new Observer<Object>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(Object s) {
+
+                if(i >= 10){
+                    timer.cancel();//终止定时器
+                }
+                changeTextView(s.toString());
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onComplete() {
+            }
+        });
 
 		//Observer的创建
-		Observer<Object> obServer = new Observer<Object>() {
-			@Override
-			public void onSubscribe(Disposable d) {
-
-			}
-
-			@Override
-			public void onNext(Object s) {
-
-				if(i >= 10){
-					timer.cancel();//终止定时器
-				}
-				changeTextView(s.toString());
-			}
-
-			@Override
-			public void onError(Throwable e) {
-				e.printStackTrace();
-			}
-
-			@Override
-			public void onComplete() {
-			}
-		};
+//		Observer<Object> obServer = new Observer<Object>() {
+//			@Override
+//			public void onSubscribe(Disposable d) {
+//
+//			}
+//
+//			@Override
+//			public void onNext(Object s) {
+//
+//				if(i >= 10){
+//					timer.cancel();//终止定时器
+//				}
+//				changeTextView(s.toString());
+//			}
+//
+//			@Override
+//			public void onError(Throwable e) {
+//				e.printStackTrace();
+//			}
+//
+//			@Override
+//			public void onComplete() {
+//			}
+//		};
 
 		//通过Subscribe绑定两者关系
-		obServable.subscribe(obServer);
+//		obServable.subscribe(obServer);
 		//指定线程，被观察者指定为子线程，观察者指定为主线程
 		//subscribeOn()指定上游线程，第一次有效，多次指定以第一次指定为准
 		//observeOn()下游线程，多次指定，最后一次有效

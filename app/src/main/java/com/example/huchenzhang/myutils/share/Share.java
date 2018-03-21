@@ -11,6 +11,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 import com.example.huchenzhang.myutils.BaseActivity;
 import com.example.huchenzhang.myutils.R;
 import com.example.huchenzhang.myutils.databinding.ShareActivityBinding;
@@ -23,6 +25,7 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 
 import java.util.Map;
@@ -100,7 +103,8 @@ public class Share extends BaseActivity{
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 		//如果权限通过，就去分享
 		if(123 == requestCode){
-			ShareText();
+//			ShareText();
+			ShareImage("","");
 		}else{
 			HuToast.show("请通过所有权限",this);
 		}
@@ -255,6 +259,19 @@ public class Share extends BaseActivity{
 		}
 	};
 
+	/**
+	 * 获取到QQ的信息，将信息显示到view上
+	 * @param data QQ过来的数据
+	 */
+	private void setInfo(@NotNull Map<String, String> data){
+		binding.tvGender.setText(data.get("gender"));
+		binding.tvCity.setText(data.get("city"));
+		Glide.with(this).load(data.get("iconurl")).into(binding.ivIconUrl);
+		binding.tvUserId.setText(data.get("openid"));
+		binding.tvAccesstoken.setText(data.get("access_token"));
+		binding.tvProvince.setText(data.get("province"));
+	}
+
 
 	/** 第三方登陆回调 **/
 	private UMAuthListener umAuthListener = new UMAuthListener() {
@@ -270,6 +287,7 @@ public class Share extends BaseActivity{
 		@Override
 		public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
 			Toast.makeText(getApplicationContext(), "Authorize succeed", Toast.LENGTH_SHORT).show();
+			setInfo(data);
 		}
 
 		@Override
