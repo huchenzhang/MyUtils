@@ -9,7 +9,7 @@ import com.example.huchenzhang.myutils.kotlin.Test3;
 import com.example.huchenzhang.myutils.myDataBinding.MyDataBindingActivity;
 import com.example.huchenzhang.myutils.netUtils.NetUtilsActivity;
 import com.example.huchenzhang.myutils.recyclerview.MyRecyclerView;
-import com.example.huchenzhang.myutils.retrofit.MyRetrofit;
+import com.example.huchenzhang.myutils.retrofit.MyRetrofitActivity;
 import com.example.huchenzhang.myutils.rxjava.RxJava;
 import com.example.huchenzhang.myutils.share.Share;
 import com.example.huchenzhang.myutils.svg.Svg;
@@ -227,7 +227,7 @@ public class MainActivity extends BaseActivity {
 	 * Zxing
 	 */
 	public void goRetrofit() {
-		intent.setClass(this, MyRetrofit.class);
+		intent.setClass(this, MyRetrofitActivity.class);
 		startActivity(intent);
 	}
 }

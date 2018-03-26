@@ -135,7 +135,7 @@
         <activity android:name=".zxing.Zxing"
             android:label="@string/zxing"/>
 
-        <activity android:name=".retrofit.MyRetrofit"
+        <activity android:name=".retrofit.MyRetrofitActivity"
             android:label="@string/retrofit"/>
 
     </application>
