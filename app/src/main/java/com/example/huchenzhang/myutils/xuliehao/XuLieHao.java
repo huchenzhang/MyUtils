@@ -1,13 +1,12 @@
 package com.example.huchenzhang.myutils.xuliehao;
 
 import android.annotation.SuppressLint;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.telephony.TelephonyManager;
 import com.example.huchenzhang.myutils.BaseActivity;
 import com.example.huchenzhang.myutils.R;
-import com.example.huchenzhang.myutils.databinding.XuLieHaoActivityBinding;
+import com.example.huchenzhang.myutils.databinding.ActivityXuLieHaoBinding;
 import java.lang.reflect.Method;
 import java.util.UUID;
 
@@ -16,13 +15,12 @@ import java.util.UUID;
  * Created by hu on 2017/4/26.
  */
 
-public class XuLieHao extends BaseActivity {
+public class XuLieHao extends BaseActivity<ActivityXuLieHaoBinding>{
 	private static TelephonyManager tm;
-	private XuLieHaoActivityBinding binding;
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		binding = DataBindingUtil.setContentView(this,R.layout.xu_lie_hao_activity);
+		this.setCountView(this,R.layout.activity_xu_lie_hao);
 		initView();
 	}
 	

@@ -1,13 +1,16 @@
 package com.example.huchenzhang.myutils;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Toast;
 import com.example.huchenzhang.myutils.keepalive.BootCompleteReceiver;
 import com.example.huchenzhang.myutils.netUtils.NetUtils;
 import com.example.huchenzhang.myutils.utils.Constants;
@@ -17,11 +20,12 @@ import com.example.huchenzhang.myutils.utils.Constants;
  * Created by hu on 2017/4/26.
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatActivity {
 	
 	private NetUtils mNetUtils = new NetUtils();//网络广播
 	private BootCompleteReceiver screen = new BootCompleteReceiver();//锁屏广播
-	
+	protected T binding;
+
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,8 +37,16 @@ public abstract class BaseActivity extends AppCompatActivity {
 		//检查当前版本
 		checkFlavor();
 	}
-	
-	
+
+	/**
+	 * 添加布局，初始化binding
+	 * @param activity activity
+	 * @param layoutResID 布局地址
+	 */
+	public void setCountView(Activity activity,@LayoutRes int layoutResID){
+		binding = DataBindingUtil.setContentView(activity,layoutResID);
+	}
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();

@@ -9,6 +9,7 @@ import com.example.huchenzhang.myutils.kotlin.Test3;
 import com.example.huchenzhang.myutils.myDataBinding.MyDataBindingActivity;
 import com.example.huchenzhang.myutils.netUtils.NetUtilsActivity;
 import com.example.huchenzhang.myutils.recyclerview.MyRecyclerView;
+import com.example.huchenzhang.myutils.retrofit.MyRetrofit;
 import com.example.huchenzhang.myutils.rxjava.RxJava;
 import com.example.huchenzhang.myutils.share.Share;
 import com.example.huchenzhang.myutils.svg.Svg;
@@ -117,6 +118,14 @@ public class MainActivity extends BaseActivity {
 				goZxing();
 			}
 		});
+
+		//Retrofit
+		binding.btRetrofit.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				goRetrofit();
+			}
+		});
 	}
 	
 	/***
@@ -211,6 +220,14 @@ public class MainActivity extends BaseActivity {
 	 */
 	public void goZxing() {
 		intent.setClass(this, Zxing.class);
+		startActivity(intent);
+	}
+
+	/***
+	 * Zxing
+	 */
+	public void goRetrofit() {
+		intent.setClass(this, MyRetrofit.class);
 		startActivity(intent);
 	}
 }

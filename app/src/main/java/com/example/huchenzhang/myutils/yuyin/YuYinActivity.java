@@ -2,12 +2,10 @@ package com.example.huchenzhang.myutils.yuyin;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.View;
 import com.baidu.tts.client.SpeechError;
 import com.baidu.tts.client.SpeechSynthesizer;
@@ -15,9 +13,8 @@ import com.baidu.tts.client.SpeechSynthesizerListener;
 import com.baidu.tts.client.TtsMode;
 import com.example.huchenzhang.myutils.BaseActivity;
 import com.example.huchenzhang.myutils.R;
-import com.example.huchenzhang.myutils.databinding.YuYinActivityBinding;
+import com.example.huchenzhang.myutils.databinding.ActivityYuYinBinding;
 import com.example.huchenzhang.myutils.utils.HuToast;
-
 import java.util.ArrayList;
 
 /**
@@ -25,14 +22,13 @@ import java.util.ArrayList;
  * Created by hu_cz on 2017/11/21 15:53.
  */
 
-public class YuYinActivity  extends BaseActivity {
+public class YuYinActivity  extends BaseActivity<ActivityYuYinBinding> {
 	
-	private  YuYinActivityBinding binding;
 	private SpeechSynthesizer mSpeechSynthesizer;
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		binding = DataBindingUtil.setContentView(this, R.layout.yu_yin_activity);
+		this.setCountView(this, R.layout.activity_yu_yin);
 		initYuYin();
 		initView();
 		initPermission();

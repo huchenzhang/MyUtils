@@ -30,15 +30,14 @@ import java.util.List;
  * Created by hu on 2018/3/16.
  */
 
-public class Zxing extends BaseActivity {
+public class Zxing extends BaseActivity<ActivityZxingBinding> {
 
-    private ActivityZxingBinding binding;
     private int REQUEST_CODE_SCAN = 111;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_zxing) ;
+        setCountView(this,R.layout.activity_zxing);
         initView();
     }
 

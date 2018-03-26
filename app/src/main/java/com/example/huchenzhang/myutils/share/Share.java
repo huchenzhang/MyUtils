@@ -2,20 +2,17 @@ package com.example.huchenzhang.myutils.share;
 
 import android.Manifest;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.example.huchenzhang.myutils.BaseActivity;
 import com.example.huchenzhang.myutils.R;
-import com.example.huchenzhang.myutils.databinding.ShareActivityBinding;
+import com.example.huchenzhang.myutils.databinding.ActivityShareBinding;
 import com.example.huchenzhang.myutils.utils.HuToast;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMAuthListener;
@@ -24,10 +21,7 @@ import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
-
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONArray;
-
 import java.util.Map;
 
 /**
@@ -35,13 +29,12 @@ import java.util.Map;
  * Created by hu_cz on 2017/12/11 14:54.
  */
 
-public class Share extends BaseActivity{
-	private ShareActivityBinding binding;
+public class Share extends BaseActivity<ActivityShareBinding>{
 	private UMShareAPI mShareAPI;
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		binding = DataBindingUtil.setContentView(this, R.layout.share_activity);
+		setCountView(this, R.layout.activity_share);
 		mShareAPI = UMShareAPI.get(this);
 		initView();
 	}

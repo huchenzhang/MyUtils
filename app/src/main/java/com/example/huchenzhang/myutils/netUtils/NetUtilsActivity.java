@@ -1,12 +1,11 @@
 package com.example.huchenzhang.myutils.netUtils;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.DatePicker;
 import com.example.huchenzhang.myutils.BaseActivity;
-import com.example.huchenzhang.myutils.databinding.NetUtilsActivityBinding;
+import com.example.huchenzhang.myutils.databinding.ActivityNetUtilsBinding;
 import com.example.huchenzhang.myutils.utils.HuToast;
 import com.example.huchenzhang.myutils.R;
 import java.util.Calendar;
@@ -16,17 +15,16 @@ import java.util.Calendar;
  * Created by hu on 2017/4/26.
  */
 
-public class NetUtilsActivity extends BaseActivity {
+public class NetUtilsActivity extends BaseActivity<ActivityNetUtilsBinding> {
 	// 定义5个记录当前时间的变量
 	private int year;
 	private int month;
 	private int day;
-	private NetUtilsActivityBinding binding;
-	
+
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		binding = DataBindingUtil.setContentView(this,R.layout.net_utils_activity);
+		setCountView(this,R.layout.activity_net_utils);
 		initValue();
 		initListener();
 	}

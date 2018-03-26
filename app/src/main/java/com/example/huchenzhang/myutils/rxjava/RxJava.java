@@ -1,11 +1,10 @@
 package com.example.huchenzhang.myutils.rxjava;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import com.example.huchenzhang.myutils.BaseActivity;
 import com.example.huchenzhang.myutils.R;
-import com.example.huchenzhang.myutils.databinding.RxJavaActivityBinding;
+import com.example.huchenzhang.myutils.databinding.ActivityRxJavaBinding;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Timer;
@@ -24,14 +23,13 @@ import io.reactivex.disposables.Disposable;
  * 一个被观察者可以有多个观察者
  */
 
-public class RxJava extends BaseActivity {
+public class RxJava extends BaseActivity<ActivityRxJavaBinding> {
 	private int i = 1;
-	private RxJavaActivityBinding binding;
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		binding = DataBindingUtil.setContentView(this,R.layout.rx_java_activity);
+		setCountView(this,R.layout.activity_rx_java);
 		initValue1();
 //		initValue2();
 	}

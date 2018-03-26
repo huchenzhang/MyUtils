@@ -1,6 +1,5 @@
 package com.example.huchenzhang.myutils.recyclerview;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -9,7 +8,7 @@ import android.support.v7.widget.OrientationHelper;
 import android.view.View;
 import com.example.huchenzhang.myutils.BaseActivity;
 import com.example.huchenzhang.myutils.R;
-import com.example.huchenzhang.myutils.databinding.RecyclerViewActivityBinding;
+import com.example.huchenzhang.myutils.databinding.ActivityRecyclerViewBinding;
 import com.example.huchenzhang.myutils.utils.HuToast;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,15 +20,14 @@ import java.util.List;
  * Created by hu on 2017/4/26.
  */
 
-public class MyRecyclerView extends BaseActivity {
-	private RecyclerViewActivityBinding binding;
+public class MyRecyclerView extends BaseActivity<ActivityRecyclerViewBinding> {
 	private List<String> mDates;//假数据
 	private MyRecyclerViewAdapter mAdapter;//适配器
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		binding = DataBindingUtil.setContentView(this,R.layout.recycler_view_activity);
+		setCountView(this,R.layout.activity_recycler_view);
 		initData();
 		initView();
 	}
@@ -51,8 +49,6 @@ public class MyRecyclerView extends BaseActivity {
 		mAdapter.setOnItemClickListener(new MyRecyclerViewAdapter.OnItemClickListener() {
 			@Override
 			public void onClick(View view, int position) {
-				Date date = null;
-				date.getTime();
 				HuToast.show("点击了 "+ position,MyRecyclerView.this);
 			}
 		});

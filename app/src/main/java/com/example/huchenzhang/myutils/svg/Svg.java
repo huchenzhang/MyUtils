@@ -1,25 +1,22 @@
 package com.example.huchenzhang.myutils.svg;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
 import com.bumptech.glide.Glide;
 import com.example.huchenzhang.myutils.BaseActivity;
 import com.example.huchenzhang.myutils.R;
-import com.example.huchenzhang.myutils.databinding.SvgActivityBinding;
+import com.example.huchenzhang.myutils.databinding.ActivitySvgBinding;
 
 /**
  * 测试
  * Created by hu_cz on 2017/11/28 16:12.
  */
 
-public class Svg extends BaseActivity {
-	private SvgActivityBinding binding;
+public class Svg extends BaseActivity<ActivitySvgBinding> {
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		binding = DataBindingUtil.setContentView(this,R.layout.svg_activity);
+		setCountView(this,R.layout.activity_svg);
 		initGif();
 	}
 
