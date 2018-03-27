@@ -6,6 +6,7 @@ package com.example.huchenzhang.myutils.utils;
  */
 
 public class HttpUrl {
-    public static final String QUERY_PHONE =  "http://api.jisuapi.com/shouji/query/";
+    public static final String BASE_URL =  "http://api.jisuapi.com/";
+    public static final String QUERY_PHONE_NUMBER =  "shouji/query";
 
 }

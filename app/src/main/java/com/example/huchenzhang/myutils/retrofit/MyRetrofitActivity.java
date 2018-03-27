@@ -27,6 +27,7 @@ public class MyRetrofitActivity extends BaseActivity<ActivityMyRetrofitBinding>{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setCountView(this, R.layout.activity_my_retrofit);
+        initRetrofit();
         initView();
     }
 
@@ -45,26 +46,30 @@ public class MyRetrofitActivity extends BaseActivity<ActivityMyRetrofitBinding>{
                 test1();
             }
         });
+    }
 
+    /***
+     * 初始化Retrofit
+     */
+    private void initRetrofit(){
+        //初始化retrofit
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(HttpUrl.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        mApi = retrofit.create(ApiService.class);
     }
 
     /**.
      * 查询电话号码归属地
      */
     private void test1(){
-        //初始化retrofit
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(HttpUrl.QUERY_PHONE)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        mApi = retrofit.create(ApiService.class);
-
         //不在主线程进行网络操作
         new Thread(new Runnable() {
             @Override
             public void run() {
                 //进行网络请求
-                getEnqueue();
+                getEnqueue1();
             }
         }).start();
     }
@@ -72,11 +77,12 @@ public class MyRetrofitActivity extends BaseActivity<ActivityMyRetrofitBinding>{
     /***
      * 得到结果，请求成功和失败的回调
      */
-    private void getEnqueue(){
+    private void getEnqueue1(){
         //url
-       String url = "?appkey=" + getString(R.string.JI_SU_SHU_JU_APPKEY) + "&shouji=" + binding.ed1.getText().toString();
-       //去请求
-        Call<PhoneBean>  call = mApi.getPhoneLocation(url);
+        //String url = "?appkey=" + getString(R.string.JI_SU_SHU_JU_APPKEY) + "&shouji=" + binding.ed1.getText().toString();
+        //http://api.jisuapi.com/shouji/query?appkey=yourappkey&shouji=13456755448
+        //去请求
+        Call<PhoneBean> call = mApi.getPhoneLocationGet(HttpUrl.QUERY_PHONE_NUMBER,getString(R.string.JI_SU_SHU_JU_APPKEY),binding.ed1.getText().toString());
         call.enqueue(new Callback<PhoneBean>() {
             @Override
             public void onResponse(Call<PhoneBean> call, Response<PhoneBean> response) {

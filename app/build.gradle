@@ -7,9 +7,9 @@ apply plugin: 'io.fabric'
 //这是编译文件中最大的代码块，关于android的所有特殊配置都在这里。
 android {
     //编译版本sdk
-    compileSdkVersion 26
+    compileSdkVersion 27
     //编译工具版本sdk-tool
-    buildToolsVersion '26.0.3'
+    buildToolsVersion '27.0.3'
     //程序默认配置，如果AndroidMainfest.xml里面定义了与这里相同的属性，会以这里为主
     defaultConfig {
         //1.作为程序唯一标示，防止同一个手机重复安装同一个应用。
@@ -18,7 +18,7 @@ android {
         //最低兼容版本
         minSdkVersion 19
         //最高版本兼容
-        targetSdkVersion 26
+        targetSdkVersion 27
         //版本号，例如：2
         versionCode Integer.parseInt(VERSION_CODE)
         //版本名字，例如：2.0.1
@@ -28,6 +28,8 @@ android {
         vectorDrawables.useSupportLibrary = true
         //适配gradle:3.0以上版本
         flavorDimensions VERSION_CODE
+        //multidex
+        multiDexEnabled true
     }
     //打包时用的签名和密码
     signingConfigs {
@@ -99,7 +101,7 @@ static def releaseTime() {
 
 //百度语音合成
 dependencies {
-    compile files('libs/com.baidu.tts_2.3.1.20170808_e39ea89.jar')
+    implementation files('libs/com.baidu.tts_2.3.1.20170808_e39ea89.jar')
     implementation files('libs/SocialSDK_QQ_Simplify.jar')
     implementation files('libs/alipay-sdk-java20180309170622-source.jar')
     implementation files('libs/alipay-sdk-java20180309170622.jar')
@@ -109,54 +111,53 @@ dependencies {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.android.support:design:26.4.0'
-    compile 'com.android.support.constraint:constraint-layout:1.1.0-beta5'
-    testCompile 'junit:junit:4.12'
-    //数据库相关
-    compile 'org.litepal.android:core:1.6.0'
-    //上拉下拉刷新
-    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
-    //recyclerview
-    compile 'com.android.support:recyclerview-v7:26.1.0'
-    //gridlayout
-    compile 'com.android.support:gridlayout-v7:26.1.0'
-    //异步RxJava2
-    compile 'io.reactivex.rxjava2:rxjava:2.0.5'
-    //RxJava2 Android
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    //RxJava2 Adapter
-    compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
-    //广播
-    compile 'com.parse.bolts:bolts-android:1.4.0'
-    //网络
-    compile 'com.squareup.okhttp3:okhttp:3.7.0'
-    compile 'com.squareup.okio:okio:1.12.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
-    //retrofit
-    compile 'com.squareup.retrofit2:retrofit:2.2.0'
-    //Gson converter
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    implementation "com.android.support:support-annotations:$supportLibVersion"
+    implementation "com.android.support:percent:$supportLibVersion"
+    implementation "com.android.support:appcompat-v7:$supportLibVersion"
+    implementation "com.android.support:design:$supportLibVersion"
+    implementation "com.android.support:recyclerview-v7:$supportLibVersion"
+    implementation "com.android.support:gridlayout-v7:$supportLibVersion"
 
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0-beta6'
+    testImplementation 'junit:junit:4.12'
+    //数据库相关
+    implementation 'org.litepal.android:core:1.6.0'
+    //上拉下拉刷新
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
+    //异步RxJava2
+    implementation 'io.reactivex.rxjava2:rxjava:2.0.5'
+    //RxJava2 Android
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    //RxJava2 Adapter
+    implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+    //广播
+    implementation 'com.parse.bolts:bolts-android:1.4.0'
+    //网络okHttp3
+    implementation 'com.squareup.okhttp3:okhttp:3.7.0'
+    implementation 'com.squareup.okio:okio:1.12.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.2.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
     //kotlin
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     //fabric，崩溃检测，用户量统计
-    compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
+    implementation('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
         transitive = true
     }
-    compile('com.crashlytics.sdk.android:crashlytics-ndk:1.1.6@aar') {
+    implementation('com.crashlytics.sdk.android:crashlytics-ndk:1.1.6@aar') {
         transitive = true
     }
     //阿里云Sophix热修复
-    compile 'com.aliyun.ams:alicloud-android-hotfix:3.1.6'
+    implementation 'com.aliyun.ams:alicloud-android-hotfix:3.1.6'
     //gson
-    compile 'com.google.code.gson:gson:2.8.0'
+    implementation 'com.google.code.gson:gson:2.8.0'
     //picasso图片处理
-    compile 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
     //权限管理
     implementation 'com.yanzhenjie:permission:2.0.0-rc3'
     //zxing扫二维码
@@ -164,6 +165,6 @@ dependencies {
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.6.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
-
-
+    //multidex
+    implementation 'com.android.support:multidex:1.0.3'
 }

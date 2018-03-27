@@ -2,6 +2,7 @@ package com.example.huchenzhang.myutils;
 
 import android.content.Context;
 import android.os.Build;
+import android.support.multidex.MultiDex;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
@@ -28,6 +29,7 @@ public class Application extends android.app.Application{
 	
 	public void onCreate(){
 		super.onCreate();
+		MultiDex.install(this);
 		//初始化Fabric
 		Fabric.with(this, new Crashlytics(), new CrashlyticsNdk());
 		Crashlytics.setBool("DEBUG", BuildConfig.DEBUG);
