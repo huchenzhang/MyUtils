@@ -15,6 +15,8 @@ import com.example.huchenzhang.myutils.keepalive.BootCompleteReceiver;
 import com.example.huchenzhang.myutils.netUtils.NetUtils;
 import com.example.huchenzhang.myutils.utils.Constants;
 
+import io.reactivex.disposables.CompositeDisposable;
+
 /**
  * 项目中Activity的基类
  * Created by hu on 2017/4/26.
@@ -25,6 +27,8 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
 	private NetUtils mNetUtils = new NetUtils();//网络广播
 	private BootCompleteReceiver screen = new BootCompleteReceiver();//锁屏广播
 	protected T binding;
+	//关闭所有rx县城
+	public CompositeDisposable mDisposables;
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,6 +40,8 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
 		registerScreen();
 		//检查当前版本
 		checkFlavor();
+
+		mDisposables = new CompositeDisposable();
 	}
 
 	/**
@@ -53,6 +59,7 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
 		//取消注册广播
 		unregisterReceiver(mNetUtils);
 		unregisterReceiver(screen);
+		mDisposables.clear();
 	}
 	
 	
@@ -97,5 +104,6 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
 		Log.e(Constants.HU_LOG, BuildConfig.FLAVOR);
 		Log.e(Constants.HU_LOG,BuildConfig.DEBUG ? "是debug版本" : "不是debug版本");
 	}
-	
+
+
 }

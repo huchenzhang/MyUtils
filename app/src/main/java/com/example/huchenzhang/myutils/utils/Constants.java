@@ -7,4 +7,5 @@ package com.example.huchenzhang.myutils.utils;
 
 public class Constants {
 	public static final String HU_LOG = "hu_cz";
+	public static final int DEFAULT_TIMEOUT = 8;
 }

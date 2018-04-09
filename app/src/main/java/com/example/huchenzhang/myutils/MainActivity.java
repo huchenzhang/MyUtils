@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
 import com.example.huchenzhang.myutils.databinding.ActivityMainBinding;
+import com.example.huchenzhang.myutils.gaoDe.GaoDe;
 import com.example.huchenzhang.myutils.kotlin.Test3;
 import com.example.huchenzhang.myutils.myDataBinding.MyDataBindingActivity;
 import com.example.huchenzhang.myutils.netUtils.NetUtilsActivity;
@@ -126,6 +127,14 @@ public class MainActivity extends BaseActivity {
 				goRetrofit();
 			}
 		});
+
+		//高德
+		binding.btGaoDe.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				goGaoDe();
+			}
+		});
 	}
 	
 	/***
@@ -228,6 +237,14 @@ public class MainActivity extends BaseActivity {
 	 */
 	public void goRetrofit() {
 		intent.setClass(this, MyRetrofitActivity.class);
+		startActivity(intent);
+	}
+
+	/***
+	 * Zxing
+	 */
+	public void goGaoDe() {
+		intent.setClass(this, GaoDe.class);
 		startActivity(intent);
 	}
 }

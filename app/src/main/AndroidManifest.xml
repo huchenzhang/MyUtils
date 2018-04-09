@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.huchenzhang.myutils">
+    package="com.example.huchenzhang.myutils">
 
     <!--网络权限-->
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -30,7 +30,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".SophixStubApplication"
+        android:name=".Application"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -50,12 +50,17 @@
             android:name="UMENG_APPKEY"
             android:value="5a2deb1bb27b0a28670001d9" >
         </meta-data>
-        <activity
-            android:name=".wxapi.WXEntryActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!--高德-->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="6815f4c3d7a777e04c5be716cab25a7c">
+        </meta-data>
+        <!--<activity-->
+            <!--android:name=".wxapi.WXEntryActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
+            <!--android:exported="true"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
@@ -137,6 +142,9 @@
 
         <activity android:name=".retrofit.MyRetrofitActivity"
             android:label="@string/retrofit"/>
+
+        <activity android:name=".gaoDe.GaoDe"
+            android:label="@string/gaoDe"/>
 
     </application>
 
