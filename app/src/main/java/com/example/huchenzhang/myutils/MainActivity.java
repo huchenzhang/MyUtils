@@ -8,6 +8,7 @@ import com.example.huchenzhang.myutils.databinding.ActivityMainBinding;
 import com.example.huchenzhang.myutils.gaoDe.GaoDe;
 import com.example.huchenzhang.myutils.kotlin.Test3;
 import com.example.huchenzhang.myutils.myDataBinding.MyDataBindingActivity;
+import com.example.huchenzhang.myutils.myView.MyViewActivity;
 import com.example.huchenzhang.myutils.netUtils.NetUtilsActivity;
 import com.example.huchenzhang.myutils.recyclerview.MyRecyclerView;
 import com.example.huchenzhang.myutils.retrofit.MyRetrofitActivity;
@@ -104,7 +105,7 @@ public class MainActivity extends BaseActivity {
 			}
 		});
 
-		//share
+		//kotlin
 		binding.btKotlin.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -133,6 +134,14 @@ public class MainActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				goGaoDe();
+			}
+		});
+
+		//自定义view
+		binding.btView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				goMyView();
 			}
 		});
 	}
@@ -233,7 +242,7 @@ public class MainActivity extends BaseActivity {
 	}
 
 	/***
-	 * Zxing
+	 * retrofit
 	 */
 	public void goRetrofit() {
 		intent.setClass(this, MyRetrofitActivity.class);
@@ -241,10 +250,18 @@ public class MainActivity extends BaseActivity {
 	}
 
 	/***
-	 * Zxing
+	 * 高德
 	 */
 	public void goGaoDe() {
 		intent.setClass(this, GaoDe.class);
+		startActivity(intent);
+	}
+
+	/***
+	 * 自定义view
+	 */
+	public void goMyView() {
+		intent.setClass(this, MyViewActivity.class);
 		startActivity(intent);
 	}
 }

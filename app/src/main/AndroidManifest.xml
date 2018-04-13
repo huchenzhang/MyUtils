@@ -146,6 +146,9 @@
         <activity android:name=".gaoDe.GaoDe"
             android:label="@string/gaoDe"/>
 
+        <activity android:name=".myView.MyViewActivity"
+            android:label="@string/myView"/>
+
     </application>
 
 </manifest>

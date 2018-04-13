@@ -89,5 +89,11 @@
             android:layout_height="wrap_content"
             android:text="@string/gaoDe"/>
 
+        <Button
+            android:id="@+id/bt_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/myView"/>
+
     </GridLayout>
 </layout>
