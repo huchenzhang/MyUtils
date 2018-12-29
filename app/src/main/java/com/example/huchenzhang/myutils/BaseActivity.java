@@ -1,16 +1,21 @@
 package com.example.huchenzhang.myutils;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
+
 import com.example.huchenzhang.myutils.keepalive.BootCompleteReceiver;
 import com.example.huchenzhang.myutils.netUtils.NetUtils;
 import com.example.huchenzhang.myutils.utils.Constants;
@@ -23,17 +28,17 @@ import io.reactivex.disposables.CompositeDisposable;
  */
 
 public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatActivity {
-	
+	private AlertDialog alertDialog;
 	private NetUtils mNetUtils = new NetUtils();//网络广播
 	private BootCompleteReceiver screen = new BootCompleteReceiver();//锁屏广播
 	protected T binding;
-	//关闭所有rx县城
+	//关闭所有rx线程
 	public CompositeDisposable mDisposables;
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		//注册网络监听
 		registerNet();
 		//注册锁屏监听
@@ -42,6 +47,31 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
 		checkFlavor();
 
 		mDisposables = new CompositeDisposable();
+	}
+
+	public void dismissLoadingDialog() {
+		if (null != alertDialog && alertDialog.isShowing()) {
+			alertDialog.dismiss();
+		}
+	}
+
+	public void showLoadingDialog() {
+		if (alertDialog != null && alertDialog.isShowing()){
+			return;
+		}
+		alertDialog = new AlertDialog.Builder(this).create();
+		alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable());
+		alertDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+			@Override
+			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+				if (keyCode == KeyEvent.KEYCODE_SEARCH || keyCode == KeyEvent.KEYCODE_BACK){
+					return true;
+				}
+				return false;
+			}
+		});
+		alertDialog.show();
+		alertDialog.setContentView(R.layout.view_loading_dialog);
 	}
 
 	/**
@@ -61,8 +91,8 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
 		unregisterReceiver(screen);
 		mDisposables.clear();
 	}
-	
-	
+
+
 	/**
 	 * 注册网络监听
 	 */
@@ -75,7 +105,7 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
 //                <action android:name="android.net.wifi.STATE_CHANGE" />//设置需要接受那个广播
 		// </intent-filter>
 		//</receiver>
-		
+
 		//注册广播第二种：2.动态注册（非常驻广播），跟注册者生命周期一致
 		//过滤器
 		IntentFilter filter = new IntentFilter();
@@ -85,8 +115,8 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
 		filter.setPriority(1000);
 		registerReceiver(mNetUtils,filter);
 	}
-	
-	
+
+
 	/**
 	 * 监听锁屏和解锁通知，不能静态注册广播，只能动态注册
 	 */
@@ -96,7 +126,7 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
 		filter.addAction(Intent.ACTION_SCREEN_OFF);
 		registerReceiver(screen, filter);
 	}
-	
+
 	/**
 	 * 检查当前版本
 	 */

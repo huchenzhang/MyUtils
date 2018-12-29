@@ -7,6 +7,9 @@ import com.taobao.sophix.SophixManager;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
+
+import org.litepal.LitePal;
+
 import java.lang.reflect.Method;
 
 /**
@@ -20,7 +23,7 @@ public class Application extends android.app.Application{
 	public void onCreate(){
 		super.onCreate();
 		MultiDex.install(this);
-
+		LitePal.initialize(this);
 		//阿里热修复：queryAndLoadNewPatch不可放在attachBaseContext 中，否则无网络权限，建议放在后面任意时刻，如onCreate中
 		//该方法主要用于查询服务器是否有新的可用补丁
 		SophixManager.getInstance().queryAndLoadNewPatch();

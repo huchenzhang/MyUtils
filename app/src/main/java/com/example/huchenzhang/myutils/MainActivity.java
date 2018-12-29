@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.huchenzhang.myutils.dataTest.AddPeopleDataActivity;
 import com.example.huchenzhang.myutils.databinding.ActivityMainBinding;
 import com.example.huchenzhang.myutils.gaoDe.GaoDe;
 import com.example.huchenzhang.myutils.kotlin.Test3;
@@ -16,12 +18,13 @@ import com.example.huchenzhang.myutils.rxjava.RxJava;
 import com.example.huchenzhang.myutils.share.Share;
 import com.example.huchenzhang.myutils.svg.Svg;
 import com.example.huchenzhang.myutils.swiperefresh.SwipeRefreshActivity;
+import com.example.huchenzhang.myutils.updateFile.UpdateActivity;
 import com.example.huchenzhang.myutils.xuliehao.XuLieHao;
 import com.example.huchenzhang.myutils.yuyin.YuYinActivity;
 import com.example.huchenzhang.myutils.zxing.Zxing;
 
 public class MainActivity extends BaseActivity {
-	
+
 	private ActivityMainBinding binding;
 	private Intent intent = new Intent();
 	@Override
@@ -30,7 +33,7 @@ public class MainActivity extends BaseActivity {
 		binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 		initListener();
 	}
-	
+
 	/** 初始化各种点击事件*/
 	private void initListener(){
 		//网络监测
@@ -40,7 +43,7 @@ public class MainActivity extends BaseActivity {
 				goNetWorkActivity();
 			}
 		});
-		
+
 		//获取手机序列号及uuid
 		binding.btXuLieHao.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -48,7 +51,7 @@ public class MainActivity extends BaseActivity {
 				getUUid();
 			}
 		});
-		
+
 		//上下拉刷新
 		binding.btSwipeRefresh.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -56,7 +59,7 @@ public class MainActivity extends BaseActivity {
 				goSwipeRefresh();
 			}
 		});
-		
+
 		//RecyclerView
 		binding.btRecyclerView.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -64,7 +67,7 @@ public class MainActivity extends BaseActivity {
 				goRecyclerView();
 			}
 		});
-		
+
 		//RxJava
 		binding.btRxJava.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -72,7 +75,7 @@ public class MainActivity extends BaseActivity {
 				goRxJavaView();
 			}
 		});
-		
+
 		//data
 		binding.btDataBind.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -80,7 +83,7 @@ public class MainActivity extends BaseActivity {
 				goDataBind();
 			}
 		});
-		
+
 		//百度语音合成
 		binding.btYuyin.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -88,7 +91,7 @@ public class MainActivity extends BaseActivity {
 				goYuYin();
 			}
 		});
-		
+
 		//svg
 		binding.btSvg.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -96,7 +99,7 @@ public class MainActivity extends BaseActivity {
 				goSvg();
 			}
 		});
-		
+
 		//share
 		binding.btShare.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -144,8 +147,24 @@ public class MainActivity extends BaseActivity {
 				goMyView();
 			}
 		});
+
+		//增加人员数据到三十万
+		binding.btAdd.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				addPeople();
+			}
+		});
+
+		//文件同步
+		binding.btUpdate.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				updateFile();
+			}
+		});
 	}
-	
+
 	/***
 	 * 网络监测
 	 */
@@ -153,7 +172,7 @@ public class MainActivity extends BaseActivity {
 		intent.setClass(this, NetUtilsActivity.class);
 		startActivity(intent);
 	}
-	
+
 	/***
 	 * 获取手机序列号及uuid
 	 */
@@ -161,7 +180,7 @@ public class MainActivity extends BaseActivity {
 		intent.setClass(this, XuLieHao.class);
 		startActivity(intent);
 	}
-	
+
 	/***
 	 * 上拉下拉刷新
 	 */
@@ -169,7 +188,7 @@ public class MainActivity extends BaseActivity {
 		intent.setClass(this, SwipeRefreshActivity.class);
 		startActivity(intent);
 	}
-	
+
 	/***
 	 * RecyclerView
 	 */
@@ -177,8 +196,8 @@ public class MainActivity extends BaseActivity {
 		intent.setClass(this, MyRecyclerView.class);
 		startActivity(intent);
 	}
-	
-	
+
+
 	/***
 	 * RxJava
 	 */
@@ -186,8 +205,8 @@ public class MainActivity extends BaseActivity {
 		intent.setClass(this, RxJava.class);
 		startActivity(intent);
 	}
-	
-	
+
+
 	/***
 	 * DataBinding
 	 */
@@ -195,8 +214,8 @@ public class MainActivity extends BaseActivity {
 		intent.setClass(this, MyDataBindingActivity.class);
 		startActivity(intent);
 	}
-	
-	
+
+
 	/***
 	 * 百度语音合成
 	 */
@@ -204,8 +223,8 @@ public class MainActivity extends BaseActivity {
 		intent.setClass(this, YuYinActivity.class);
 		startActivity(intent);
 	}
-	
-	
+
+
 	/***
 	 * svg
 	 */
@@ -213,8 +232,8 @@ public class MainActivity extends BaseActivity {
 		intent.setClass(this, Svg.class);
 		startActivity(intent);
 	}
-	
-	
+
+
 	/***
 	 * share
 	 */
@@ -262,6 +281,22 @@ public class MainActivity extends BaseActivity {
 	 */
 	public void goMyView() {
 		intent.setClass(this, MyViewActivity.class);
+		startActivity(intent);
+	}
+
+	/**
+	 * 增加人员数据到三十万
+	 */
+	public void addPeople(){
+		intent.setClass(this, AddPeopleDataActivity.class);
+		startActivity(intent);
+	}
+
+	/**
+	 * 文件同步
+	 */
+	public void updateFile(){
+		intent.setClass(this, UpdateActivity.class);
 		startActivity(intent);
 	}
 }

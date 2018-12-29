@@ -1,6 +1,5 @@
 package com.example.huchenzhang.myutils.myhttp;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;

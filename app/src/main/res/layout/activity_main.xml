@@ -95,5 +95,19 @@
             android:layout_height="wrap_content"
             android:text="@string/myView"/>
 
+        <Button
+            android:id="@+id/bt_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/addPeople"
+            />
+
+        <Button
+            android:id="@+id/bt_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/update"
+            />
+
     </GridLayout>
 </layout>
