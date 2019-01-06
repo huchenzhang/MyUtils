@@ -33,10 +33,12 @@ public class UpdateActivity extends BaseActivity<ActivityUpdateBinding>{
             Manifest.permission.WRITE_EXTERNAL_STORAGE};
     //请求状态码
     private static int REQUEST_PERMISSION_CODE = 1;
-    private String path = Environment.getExternalStorageDirectory().getPath()+"/hu/";
-    private String pathConfig = Environment.getExternalStorageDirectory().getPath()+"/hu/config/";
-    private String pathList = Environment.getExternalStorageDirectory().getPath()+"/hu/list/";
-    private String pathResource = Environment.getExternalStorageDirectory().getPath()+"/hu/resource/";
+    private FTP ftp;
+    private Thread downloadThread;
+    private String localPath = Environment.getExternalStorageDirectory().getPath()+"/hu/";
+    private String localPathConfig = Environment.getExternalStorageDirectory().getPath()+"/hu/config/";
+    private String localPathList = Environment.getExternalStorageDirectory().getPath()+"/hu/list/";
+    private String localPathResource = Environment.getExternalStorageDirectory().getPath()+"/hu/resource/";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,44 +48,23 @@ public class UpdateActivity extends BaseActivity<ActivityUpdateBinding>{
         binding.bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                binding.tv1.setText(getLastUpdateTime(pathConfig));
+                binding.tv1.setText(getLastUpdateTime(localPathConfig));
             }
         });
         binding.bt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                FileUtil.deleteFile(new File(path));//删除目录及目录下的文件
-                deleteFilesByDirectory(new File(pathConfig));//删除目录下文件
+                deleteFilesByDirectory(new File(localPathConfig));//删除目录下文件
             }
         });
-        final FTP ftp = new FTP("172.18.40.160","hu","hu");
+        ftp = new FTP("172.18.30.86","hu","hu");
+        downloadThread = new DownloadThread();
         binding.bt3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                boolean b = ftp.openConnect();
-                                Log.e("huchenzhang",b ? "链接成功":"链接失败");
-                                if (b){
-//                                    List<FTPFile> list = ftp.listFiles("\\config\\");
-//                                    for (FTPFile ftpFile : list){
-//                                        boolean a = ftp.downloadSingle(new File(path + ftpFile.getName()),ftpFile);
-//                                    ftp.downloadFile1("\\config\\",path);
-                                    ftp.downloadFile1("\\config\\",pathConfig);
-                                    ftp.downloadFile1("\\list\\",pathList);
-                                    ftp.downloadFile1("\\resource\\",pathResource);
-//                                    Log.e("huchenzhang" , a ? "下载成功":"下载失败");
-//                                    }
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }).start();
-
+                    downloadThread.start();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -143,6 +124,21 @@ public class UpdateActivity extends BaseActivity<ActivityUpdateBinding>{
         if (directory != null && directory.exists() && directory.isDirectory()) {
             for (File item : directory.listFiles()) {
                 item.delete();
+            }
+        }
+    }
+
+    private class DownloadThread extends Thread{
+        @Override
+        public void run() {
+            super.run();
+            try {
+                ftp.openConnect();
+                ftp.downloadFile1("\\config\\",localPathConfig);
+                ftp.downloadFile1("\\list\\",localPathList);
+                ftp.downloadFile1("\\resource\\",localPathResource);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }

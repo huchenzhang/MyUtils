@@ -109,5 +109,12 @@
             android:text="@string/update"
             />
 
+        <Button
+            android:id="@+id/bt_bluetooth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bluetooth"
+            />
+
     </GridLayout>
 </layout>

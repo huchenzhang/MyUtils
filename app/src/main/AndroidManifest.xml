@@ -26,6 +26,9 @@
     <uses-permission android:name="android.permission.VIBRATE" /> <!-- 震动权限 -->
     <uses-permission android:name="android.permission.CAMERA" /> <!-- 摄像头权限 -->
     <uses-feature android:name="android.hardware.camera.autofocus" /> <!-- 自动聚焦权限 -->
+    <!--蓝牙权限-->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
 
     <application
         android:allowBackup="true"
@@ -156,6 +159,9 @@
 
         <activity android:name=".updateFile.UpdateActivity"
             android:label="@string/update"/>
+
+        <activity android:name=".bluetooth.MyBluetoothActivity"
+            android:label="@string/bluetooth"/>
 
     </application>
 

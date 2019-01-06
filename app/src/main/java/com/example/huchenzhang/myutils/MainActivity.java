@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.huchenzhang.myutils.bluetooth.MyBluetoothActivity;
 import com.example.huchenzhang.myutils.dataTest.AddPeopleDataActivity;
 import com.example.huchenzhang.myutils.databinding.ActivityMainBinding;
 import com.example.huchenzhang.myutils.gaoDe.GaoDe;
@@ -163,6 +164,14 @@ public class MainActivity extends BaseActivity {
 				updateFile();
 			}
 		});
+
+		//蓝牙
+		binding.btBluetooth.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				bluetooth();
+			}
+		});
 	}
 
 	/***
@@ -297,6 +306,14 @@ public class MainActivity extends BaseActivity {
 	 */
 	public void updateFile(){
 		intent.setClass(this, UpdateActivity.class);
+		startActivity(intent);
+	}
+
+	/**
+	 * 蓝牙
+	 */
+	public void bluetooth(){
+		intent.setClass(this, MyBluetoothActivity.class);
 		startActivity(intent);
 	}
 }
