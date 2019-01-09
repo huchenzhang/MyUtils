@@ -194,6 +194,7 @@
     <orderEntry type="library" name="com.android.support:appcompat-v7-27.1.0" level="project" />
     <orderEntry type="library" name="com.google.code.gson:gson:2.8.0@jar" level="project" />
     <orderEntry type="library" name="org.litepal.android:core-2.0.0" level="project" />
+    <orderEntry type="library" name="__local_aars__:D.\TeamServices\MyUtils\app\libs\poi-ooxml-4.0.1.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="com.android.support:design-27.1.0" level="project" />
     <orderEntry type="library" name="__local_aars__:D.\TeamServices\MyUtils\app\libs\commons-net-examples-3.6.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="__local_aars__:D.\TeamServices\MyUtils\app\libs\SocialSDK_Sina_Simplify.jar:unspecified@jar" level="project" />
@@ -224,14 +225,17 @@
     <orderEntry type="library" scope="TEST" name="org.hamcrest:hamcrest-integration:1.3@jar" level="project" />
     <orderEntry type="library" name="com.github.bumptech.glide:annotations:4.6.1@jar" level="project" />
     <orderEntry type="library" name="__local_aars__:D.\TeamServices\MyUtils\app\libs\alipay-sdk-java20180309170622-source.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="__local_aars__:D.\TeamServices\MyUtils\app\libs\poi-ooxml-schemas-4.0.1.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="__local_aars__:D.\TeamServices\MyUtils\app\libs\SocialSDK_QQ_Simplify.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="com.android.databinding:library-3.1.0" level="project" />
     <orderEntry type="library" name="com.squareup.retrofit2:converter-scalars:2.0.0@jar" level="project" />
     <orderEntry type="library" name="org.reactivestreams:reactive-streams:1.0.0@jar" level="project" />
     <orderEntry type="library" name="com.github.bumptech.glide:gifdecoder-4.6.1" level="project" />
+    <orderEntry type="library" name="__local_aars__:D.\TeamServices\MyUtils\app\libs\poi-excelant-4.0.1.jar:unspecified@jar" level="project" />
     <orderEntry type="library" scope="TEST" name="net.sf.kxml:kxml2:2.3.0@jar" level="project" />
     <orderEntry type="library" name="com.squareup.picasso:picasso:2.5.2@jar" level="project" />
     <orderEntry type="library" name="com.squareup.retrofit2:retrofit:2.2.0@jar" level="project" />
+    <orderEntry type="library" name="__local_aars__:D.\TeamServices\MyUtils\app\libs\poi-scratchpad-4.0.1.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="com.github.yuzhiqiang1993:zxing-2.1.4" level="project" />
     <orderEntry type="library" name="__local_aars__:D.\TeamServices\MyUtils\app\libs\commons-logging-1.1.1.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="com.android.support:multidex-1.0.3" level="project" />
@@ -275,6 +279,7 @@
     <orderEntry type="library" name="android.arch.lifecycle:livedata-core-1.1.0" level="project" />
     <orderEntry type="library" name="org.jetbrains:annotations:13.0@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-media-compat-27.1.0" level="project" />
+    <orderEntry type="library" name="__local_aars__:D.\TeamServices\MyUtils\app\libs\poi-4.0.1.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-fragment-27.1.0" level="project" />
     <orderEntry type="library" name="com.android.support:support-v4-27.1.0" level="project" />
     <orderEntry type="library" name="__local_aars__:D.\TeamServices\MyUtils\app\libs\commons-net-3.6.jar:unspecified@jar" level="project" />

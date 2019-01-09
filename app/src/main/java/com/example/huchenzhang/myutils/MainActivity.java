@@ -11,6 +11,7 @@ import com.example.huchenzhang.myutils.databinding.ActivityMainBinding;
 import com.example.huchenzhang.myutils.gaoDe.GaoDe;
 import com.example.huchenzhang.myutils.kotlin.Test3;
 import com.example.huchenzhang.myutils.myDataBinding.MyDataBindingActivity;
+import com.example.huchenzhang.myutils.myPoi.PoiActivity;
 import com.example.huchenzhang.myutils.myView.MyViewActivity;
 import com.example.huchenzhang.myutils.netUtils.NetUtilsActivity;
 import com.example.huchenzhang.myutils.recyclerview.MyRecyclerView;
@@ -172,6 +173,14 @@ public class MainActivity extends BaseActivity {
 				bluetooth();
 			}
 		});
+
+		//poi
+		binding.btPoi.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				poi();
+			}
+		});
 	}
 
 	/***
@@ -314,6 +323,14 @@ public class MainActivity extends BaseActivity {
 	 */
 	public void bluetooth(){
 		intent.setClass(this, MyBluetoothActivity.class);
+		startActivity(intent);
+	}
+
+	/**
+	 * poi
+	 */
+	public void poi(){
+		intent.setClass(this, PoiActivity.class);
 		startActivity(intent);
 	}
 }

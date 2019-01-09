@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <android.support.constraint.ConstraintLayout
@@ -8,9 +8,19 @@
 
         <Button
             android:id="@+id/bt_1"
-            android:text="打开蓝牙"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="打开蓝牙"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/bt_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="扫描蓝牙设备"
+            app:layout_constraintStart_toEndOf="@+id/bt_1" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

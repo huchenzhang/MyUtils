@@ -163,6 +163,9 @@
         <activity android:name=".bluetooth.MyBluetoothActivity"
             android:label="@string/bluetooth"/>
 
+        <activity android:name=".myPoi.PoiActivity"
+            android:label="@string/poi"/>
+
     </application>
 
 </manifest>

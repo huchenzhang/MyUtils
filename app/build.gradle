@@ -15,7 +15,7 @@ android {
         //2.作为R文件的包名，改名不会报错
         applicationId "com.example.huchenzhang.myutils"
         //最低兼容版本
-        minSdkVersion 21
+        minSdkVersion 26
         //最高版本兼容
         targetSdkVersion 27
         //版本号，例如：2
