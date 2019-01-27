@@ -6,20 +6,18 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanResult;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-
 import com.example.huchenzhang.myutils.BaseActivity;
 import com.example.huchenzhang.myutils.R;
 import com.example.huchenzhang.myutils.databinding.ActivityMyBluetoothBinding;
 import com.example.huchenzhang.myutils.utils.Constants;
-
+import net.vidageek.mirror.dsl.Mirror;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +60,32 @@ public class MyBluetoothActivity extends BaseActivity<ActivityMyBluetoothBinding
                 searchBluetooth();
             }
         });
+        binding.bt3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.tv1.setText(getBluetoothMacAddress());
+            }
+        });
+    }
+
+    private String getBlueAddress(){
+//        String str = android.provider.Settings.Secure.getString(Application.getAppContext().getContentResolver(), "bluetooth_address");
+//        return "名称:"+ bluetoothAdapter.getName() + "\n地址:" + str;
+        return "";
+    }
+
+    private String getBluetoothMacAddress() {
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        Object bluetoothManagerService = new Mirror().on(bluetoothAdapter).get().field("mService");
+        if (bluetoothManagerService == null) {
+            return null;
+        }
+        Object address = new Mirror().on(bluetoothManagerService).invoke().method("getAddress").withoutArgs();
+        if (address != null && address instanceof String) {
+            return (String) address;
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -93,11 +117,17 @@ public class MyBluetoothActivity extends BaseActivity<ActivityMyBluetoothBinding
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
             super.onScanResult(callbackType, result);
-            new String(result.getScanRecord().getBytes());
+            String name = new String(result.getScanRecord().getBytes());
+            String name2 = "";
+            try {
+                name2 = new String(result.getScanRecord().getBytes(),"utf-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
             final BluetoothDevice bluetoothDevice = result.getDevice();
+            final BleAdvertisedData devicName = BleUtil.parseAdertisedData(result.getScanRecord().getBytes());
             boolean isSame = true;
             if (bluetoothDevice != null){
-
                 for (BluetoothDevice bd : listDevices){//设备列表中是否存在一样的蓝牙设备
                     if (bd.getAddress().equalsIgnoreCase(bluetoothDevice.getAddress())){
                         isSame = false;
@@ -106,7 +136,7 @@ public class MyBluetoothActivity extends BaseActivity<ActivityMyBluetoothBinding
                 //存在一样的设备不添加到集合中
                 if (isSame){
                     listDevices.add(bluetoothDevice);
-                    Log.e(Constants.HU_LOG,"蓝牙设备 ：" + bluetoothDevice.getName() + bluetoothDevice.getAddress());
+                    Log.e(Constants.HU_LOG,"蓝牙设备 ：" + bluetoothDevice.getName() + " name:" + devicName.getName() + " \nAddress: " + bluetoothDevice.getAddress());
                 }
             }
         }

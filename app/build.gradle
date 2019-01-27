@@ -15,7 +15,7 @@ android {
         //2.作为R文件的包名，改名不会报错
         applicationId "com.example.huchenzhang.myutils"
         //最低兼容版本
-        minSdkVersion 26
+        minSdkVersion 21
         //最高版本兼容
         targetSdkVersion 27
         //版本号，例如：2
@@ -162,4 +162,6 @@ dependencies {
 
     //multidex
     implementation 'com.android.support:multidex:1.0.3'
+    //获取蓝牙地址使用
+    implementation 'net.vidageek:mirror:1.6.1'
 }

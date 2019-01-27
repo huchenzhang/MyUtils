@@ -28,7 +28,6 @@ public class Application extends android.app.Application{
 		//该方法主要用于查询服务器是否有新的可用补丁
 		SophixManager.getInstance().queryAndLoadNewPatch();
 		Application.context = getApplicationContext();
-		
 		//友盟初始化
 		UMShareAPI.get(this);
 		Config.DEBUG = true;

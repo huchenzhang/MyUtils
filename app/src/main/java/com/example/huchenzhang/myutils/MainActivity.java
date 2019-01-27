@@ -4,14 +4,12 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
-
 import com.example.huchenzhang.myutils.bluetooth.MyBluetoothActivity;
 import com.example.huchenzhang.myutils.dataTest.AddPeopleDataActivity;
 import com.example.huchenzhang.myutils.databinding.ActivityMainBinding;
 import com.example.huchenzhang.myutils.gaoDe.GaoDe;
 import com.example.huchenzhang.myutils.kotlin.Test3;
 import com.example.huchenzhang.myutils.myDataBinding.MyDataBindingActivity;
-import com.example.huchenzhang.myutils.myPoi.PoiActivity;
 import com.example.huchenzhang.myutils.myView.MyViewActivity;
 import com.example.huchenzhang.myutils.netUtils.NetUtilsActivity;
 import com.example.huchenzhang.myutils.recyclerview.MyRecyclerView;
@@ -174,13 +172,6 @@ public class MainActivity extends BaseActivity {
 			}
 		});
 
-		//poi
-		binding.btPoi.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				poi();
-			}
-		});
 	}
 
 	/***
@@ -326,13 +317,6 @@ public class MainActivity extends BaseActivity {
 		startActivity(intent);
 	}
 
-	/**
-	 * poi
-	 */
-	public void poi(){
-		intent.setClass(this, PoiActivity.class);
-		startActivity(intent);
-	}
 }
 
 	

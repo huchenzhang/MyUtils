@@ -1,7 +1,5 @@
 package com.example.huchenzhang.myutils.updateFile;
 
-
-import android.text.TextUtils;
 import android.util.Log;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
@@ -13,9 +11,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by hu on 2018/12/26.
